@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+	                       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	                       http://www.springframework.org/schema/aop
+	                       http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+	                       http://www.springframework.org/schema/context
+	                       http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <context:annotation-config />
+
+    <bean id="service1" class="com.serli.soap.scope.impl.Service1Impl"/>
+
+    <bean id="service2" class="com.serli.soap.scope.impl.Service2Impl"/>
+
+    <bean id="scoped" class="com.serli.soap.scope.impl.ScopedBeanImpl" scope="soap">
+        <aop:scoped-proxy proxy-target-class="false"/>
+    </bean>
+    
+    <bean class="org.springframework.beans.factory.config.CustomScopeConfigurer" >
+      <property name="scopes">
+          <map>
+              <entry key="soap">
+                  <bean class="com.serli.soap.scope.spring.SpringSOAPRequestScope"/>
+              </entry>
+          </map>
+      </property>
+    </bean>
+    
+</beans>
