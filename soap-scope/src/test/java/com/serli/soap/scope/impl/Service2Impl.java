@@ -6,7 +6,7 @@ import javax.inject.Singleton;
 @Singleton
 public class Service2Impl implements Service2 {
 
-    @Inject
+    @Inject @com.google.inject.Inject
     private ScopedBean bean;
 
     @Override

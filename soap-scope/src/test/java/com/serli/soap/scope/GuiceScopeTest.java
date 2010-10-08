@@ -37,8 +37,8 @@ public class GuiceScopeTest {
         injector = Guice.createInjector(new AbstractModule() {
             @Override
             public void configure() {
-                bindScope(SOAPScoped.class, SOAP_SCOPE);
-                bind(ScopedBean.class).to(ScopedBeanImpl.class).in(SOAP_SCOPE);
+                bindScope(SOAPScoped.class, GuiceScopeTest.SOAP_SCOPE);
+                bind(ScopedBean.class).to(ScopedBeanImpl.class).in(GuiceScopeTest.SOAP_SCOPE);
                 bind(Service1.class).to(Service1Impl.class).in(Scopes.SINGLETON);
                 bind(Service2.class).to(Service2Impl.class).in(Scopes.SINGLETON);
             }

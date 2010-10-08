@@ -5,22 +5,66 @@ import com.google.inject.Provider;
 import com.google.inject.Scope;
 import com.serli.soap.scope.SOAPRequestContext;
 import com.serli.soap.scope.SOAPRequestContextHolder;
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
+import javassist.util.proxy.MethodFilter;
+import javassist.util.proxy.MethodHandler;
+import javassist.util.proxy.ProxyFactory;
+import javassist.util.proxy.ProxyObject;
 
 public class GuiceSOAPRequestScope implements Scope {
 
+    private Map<Class, Object> proxies = new HashMap<Class, Object>();
+
     @Override
     public <T> Provider<T> scope(final Key<T> key, final Provider<T> creator) {
-        final SOAPRequestContext context = SOAPRequestContextHolder.getRequestContext();
-        T scopedObject  = (T) context.getBean(key.getTypeLiteral().getRawType().getName());
-        if (scopedObject == null) {
-            scopedObject = creator.get();
-            context.setBean(key.getTypeLiteral().getRawType().getName(), scopedObject);
-        }
-        final T returnedObject = scopedObject;
+        final Class clazz = key.getTypeLiteral().getRawType();
         return new Provider<T>() {
+
+            public final T getObject() {
+                return creator.get();
+            }
+
             @Override
             public T get() {
-                return returnedObject;
+                if (!proxies.containsKey(clazz)) {
+                    ProxyFactory fact = new ProxyFactory();
+                    if (clazz.isInterface())
+                        fact.setInterfaces(new Class[] {clazz});
+                    else
+                        fact.setSuperclass(clazz);
+                    fact.setFilter(new MethodFilter() {
+                        @Override
+                        public boolean isHandled(Method method) {
+                            return true;
+                        }
+                    });
+                    Class newBeanClass = fact.createClass();
+                    T scopedObject = null;
+                    try {
+                        scopedObject = (T) newBeanClass.cast(newBeanClass.newInstance());
+                    } catch (Exception ex) {
+                        throw new IllegalStateException("Impossible de créer un proxy pour l'objet "
+                                + clazz + " dans le scope");
+                    }
+                    MethodHandler mHandler = new MethodHandler() {
+                        @Override
+                        public Object invoke(Object self, Method m,
+                                Method proceed, Object[] args) throws Throwable {
+                            final SOAPRequestContext context = SOAPRequestContextHolder.getRequestContext();
+                            T scopedObject = (T) context.getBean(key.getTypeLiteral().getRawType().getName());
+                            if (scopedObject == null) {
+                                scopedObject = creator.get();
+                                context.setBean(key.getTypeLiteral().getRawType().getName(), scopedObject);
+                            }
+                            return m.invoke(scopedObject, args);
+                        }
+                    };
+                    ((ProxyObject) scopedObject).setHandler(mHandler);
+                    proxies.put(clazz, scopedObject);
+                }
+                return (T) proxies.get(clazz);
             }
         };
     }

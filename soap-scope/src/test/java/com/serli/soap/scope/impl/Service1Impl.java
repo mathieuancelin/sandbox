@@ -6,10 +6,10 @@ import javax.inject.Singleton;
 @Singleton
 public class Service1Impl implements Service1 {
 
-    @Inject
+    @Inject @com.google.inject.Inject // thanks google for never publishing the JSR-330 RI
     private ScopedBean bean;
 
-    @Inject
+    @Inject @com.google.inject.Inject
     private Service2 service;
 
     @Override
