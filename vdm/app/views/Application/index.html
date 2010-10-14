@@ -1,0 +1,17 @@
+#{extends 'main.html' /}
+#{set title:'vie de merde' /}
+<h1>Vie de merde</h1>
+%{
+def xml = new XmlSlurper().parseText(wsResponse)
+}%
+<div id="container">
+	#{list items: xml.vdms.vdm, as: 'vdm'}
+		<div id="content">
+			<br/>
+			<b>${vdm.auteur}</b> a une vie de merde dans la catégorie <b>${vdm.categorie}</b>
+			<br/><br/>
+			${vdm.texte}
+			<br/><br/>
+		</div>
+	#{/list}
+</div>
