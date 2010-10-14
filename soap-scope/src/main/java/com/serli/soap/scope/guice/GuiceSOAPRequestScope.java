@@ -20,6 +20,7 @@ public class GuiceSOAPRequestScope implements Scope {
     @Override
     public <T> Provider<T> scope(final Key<T> key, final Provider<T> creator) {
         final Class clazz = key.getTypeLiteral().getRawType();
+        System.out.println("get " + Thread.currentThread().getName());
         return new Provider<T>() {
 
             public final T getObject() {
@@ -48,16 +49,12 @@ public class GuiceSOAPRequestScope implements Scope {
                         throw new IllegalStateException("Impossible de créer un proxy pour l'objet "
                                 + clazz + " dans le scope");
                     }
+                    final MyProvider<T> provider = new MyProvider(key, creator);
                     MethodHandler mHandler = new MethodHandler() {
                         @Override
                         public Object invoke(Object self, Method m,
                                 Method proceed, Object[] args) throws Throwable {
-                            final SOAPRequestContext context = SOAPRequestContextHolder.getRequestContext();
-                            T scopedObject = (T) context.getBean(key.getTypeLiteral().getRawType().getName());
-                            if (scopedObject == null) {
-                                scopedObject = creator.get();
-                                context.setBean(key.getTypeLiteral().getRawType().getName(), scopedObject);
-                            }
+                            T scopedObject = provider.get();
                             return m.invoke(scopedObject, args);
                         }
                     };
@@ -67,5 +64,30 @@ public class GuiceSOAPRequestScope implements Scope {
                 return (T) proxies.get(clazz);
             }
         };
+    }
+
+    public static class MyProvider<T> implements Provider<T> {
+
+        private final Provider<T> creator;
+
+        private final Key<T> key;
+
+        public MyProvider(Key<T> key, Provider<T> creator) {
+            this.creator = creator;
+            this.key = key;
+        }
+
+        @Override
+        public T get() {
+            System.out.println("get ...");
+            final SOAPRequestContext context = SOAPRequestContextHolder.getRequestContext();
+            T scopedObject = (T) context.getBean(key.getTypeLiteral().getRawType().getName());
+            if (scopedObject == null) {
+                scopedObject = creator.get();
+                context.setBean(key.getTypeLiteral().getRawType().getName(), scopedObject);
+            }
+            return scopedObject;
+        }
+
     }
 }

@@ -27,6 +27,7 @@ public class CDISOAPRequestScope implements Context {
 
     @Override
     public <T> T get(final Contextual<T> contextual, final CreationalContext<T> creationalContext) {  
+        
         final Bean bean = (Bean) contextual;
         if (!proxies.containsKey(bean.getBeanClass())) {
             ProxyFactory fact = new ProxyFactory();
