@@ -8,7 +8,7 @@ public class VdmBinder extends Binder {
 
     @Override
     public void configureBindings() {
-        bind(RandomService.class).to(RandomServiceImpl.class);
+        bind(RandomService.class).annotatedWith(VDM.class).to(RandomServiceImpl.class);
     }
 
 }

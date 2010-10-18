@@ -3,9 +3,13 @@ package services.impl;
 import org.w3c.dom.Document;
 import play.libs.WS;
 import services.RandomService;
+import javax.inject.Singleton;
+import binders.VDM;
 
 import org.apache.commons.lang.StringEscapeUtils;
 
+@VDM
+@Singleton
 public class RandomServiceImpl implements RandomService {
 	
 	public final static String URL = "http://api.viedemerde.fr/1.0/view/";
