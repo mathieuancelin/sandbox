@@ -1,0 +1,10 @@
+body{
+    background: #cacfb4;
+}
+
+#container{
+    width: 1000px;
+    height: 100%;
+    text-align: center;
+    margin: 0px auto;
+}
