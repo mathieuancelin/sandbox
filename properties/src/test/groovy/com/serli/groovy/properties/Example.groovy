@@ -1,20 +1,17 @@
 package com.serli.groovy.properties
 
-/**
- * Example Groovy class.
- */
 @WithProperties
 class Example {
 
     def show() {
-        println "$ExampleProperties.hello.world"
+        println "$config.hello.world"
     }
 
-    def troulala() {
-        println ExampleProperties.troulala
+    def dummy() {
+        println config.dummy
     }
 
     def printlnI18N() {
-        println "in the properties file : $ExampleProperties.props.text"
+        println "in the properties file : $config.hello.kids"
     }
 }

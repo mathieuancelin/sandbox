@@ -6,8 +6,12 @@ package com.serli.groovy.properties
 class ExampleTest extends GroovyTestCase {
 
     void testShow() {
-        new Example().show()
-        new Example().troulala()
-        new Example().printlnI18N()
+        def exemple = new Example()
+        assert exemple.config.hello.world == "Hello World!"
+        assert exemple.config.hello.kids == "Hello kids!"
+        assert exemple.config.dummy == "dummy"
+        exemple.dummy()
+        exemple.printlnI18N()
+        exemple.show()
     }
 }
