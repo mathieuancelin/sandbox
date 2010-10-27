@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.serli.gridgain</groupId>
+    <artifactId>gridgain</artifactId>
+    <version>1.0</version>
+    <packaging>jar</packaging>
+    <name>GridGain Test</name>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.scala-tools</groupId>
+                <artifactId>maven-scala-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <scalaVersion>2.7.7</scalaVersion>
+                    <launchers>
+                        <launcher>
+                            <id>foo</id>
+                            <mainClass>com.serli.gridgain.Hello</mainClass>
+                            <jvmArgs>
+                                <jvmArg>-DGRIDGAIN_HOME=/Applications/Developer/gridgain-3.0.0</jvmArg>
+                            </jvmArgs>
+                        </launcher>
+                    </launchers>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.gridgain</groupId>
+            <artifactId>gridgain</artifactId>
+            <version>3.0.0c</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.scala-lang</groupId>
+                    <artifactId>scala-compiler</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-library</artifactId>
+            <version>2.7.7</version>
+        </dependency>
+    </dependencies>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>scala-tools.org</id>
+            <name>Scala-tools Maven2 Repository</name>
+            <url>http://scala-tools.org/repo-releases</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <repositories>
+        <repository>
+            <id>gridgain</id>
+            <url>http://www.gridgainsystems.com/maven2/</url>
+        </repository>
+        <repository>
+            <id>scala-tools</id>
+            <url>http://scala-tools.org/repo-releases</url>
+        </repository>
+    </repositories>
+
+</project>
