@@ -6,6 +6,13 @@ class ScriptHelper {
         return enhanceScript(f.getText())
     }
 
+    /**
+     * Really ugly, but I have no time to investigate
+     * on bindings or environments.
+     * 
+     * @param script
+     * @return
+     */
     static String enhanceScript(String script) {
         String head = "import com.mancelin.nab.Nabaztag\n\n"
         head += "import static com.mancelin.nab.Led.*\n"
