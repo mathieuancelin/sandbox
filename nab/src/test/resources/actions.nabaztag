@@ -1,0 +1,20 @@
+
+Nabaztag.reference("UU9876", "54554345").execute {
+
+    endors toi
+
+    reveilles toi
+
+    emailsNonLus
+
+    joue "http://bonjour.com/bonjour.mp3"
+
+    parleComme julie
+
+    dis "bonjour tout le monde"
+
+    allume led_du_milieu en vert pendant 3.secondes
+
+    bouge oreille_droite de 12.degres pendant 6.secondes
+
+}
