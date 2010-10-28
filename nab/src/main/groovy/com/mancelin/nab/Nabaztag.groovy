@@ -13,6 +13,8 @@ class Nabaztag {
     }
 
     def execute(Closure c) {
+        assert sn != null
+        assert token != null
         this.toi = this
         def clone = c.clone()
         clone.delegate = new Nabaztag()
