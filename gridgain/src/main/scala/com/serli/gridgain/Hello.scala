@@ -39,7 +39,7 @@ object Hello {
             println("calculating for: " + w)
             w.length
         },
-        (s: Seq[Int]) => (0 /: s)(_ + _))
+        (s: Seq[Int]) => s.reduceLeft(_ + _))
 
     /**
      * Messages between 2 nodes    .
