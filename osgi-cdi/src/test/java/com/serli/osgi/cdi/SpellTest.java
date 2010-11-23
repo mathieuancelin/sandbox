@@ -1,6 +1,5 @@
 package com.serli.osgi.cdi;
 
-import com.serli.osgi.cdi.gui.SpellCheckerGui;
 import com.serli.osgi.cdi.services.DictionaryService;
 import com.serli.osgi.cdi.services.SpellCheckerService;
 import org.jboss.weld.environment.se.Weld;

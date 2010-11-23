@@ -10,9 +10,9 @@
     <name>osgi-cdi</name>
     <dependencies>
         <dependency>
-            <groupId>org.apache.felix</groupId>
-            <artifactId>org.osgi.core</artifactId>
-            <version>1.4.0</version>
+            <groupId>javax.enterprise</groupId>
+            <artifactId>cdi-api</artifactId>
+            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>org.jboss.weld</groupId>
@@ -21,24 +21,59 @@
         </dependency>
         <dependency>
             <groupId>org.jboss.weld</groupId>
-            <artifactId>weld-osgi-bundle</artifactId>
+            <artifactId>weld-api</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.weld</groupId>
+            <artifactId>weld-core</artifactId>
             <version>1.0.1-Final</version>
         </dependency>
         <dependency>
-            <groupId>javax.enterprise</groupId>
-            <artifactId>cdi-api</artifactId>
+            <groupId>org.jboss.weld</groupId>
+            <artifactId>weld-spi</artifactId>
             <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.javassist</groupId>
+            <artifactId>javassist</artifactId>
+            <version>3.14.0-GA</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>r06</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <version>1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.interceptor</groupId>
+            <artifactId>jboss-interceptor-spi</artifactId>
+            <version>2.0.0.Alpha3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.interceptor</groupId>
+            <artifactId>jboss-interceptor-core</artifactId>
+            <version>2.0.0.Alpha3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.osgi.core</artifactId>
+            <version>1.2.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.felix</groupId>
             <artifactId>org.apache.felix.main</artifactId>
-            <version>2.0.2</version>
+            <version>3.0.6</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.felix.gogo</groupId>
             <artifactId>org.apache.felix.gogo.commands</artifactId>
-            <version>0.2.2</version>
+            <version>0.4.0</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -53,19 +88,55 @@
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
-                <version>2.0.1</version>
+                <version>2.1.0</version>
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
+                        <_include>-osgi.bundle</_include>
+                        <Embed-Dependency>*; scope=compile; inline=true, slf4j-jdk14; inline=true, artifactId=!org.osgi.core|org.apache.felix.gogo.commands|org.apache.felix.main</Embed-Dependency>
+                        
+                        <_exportcontents>
+                             javax.inject;
+                             javax.decorator;
+                             javax.enterprise.*;
+                             version=1.4.0,
+                             org.jboss.weld.context;
+                             org.jboss.weld.ejb;
+                             org.jboss.weld.bean;
+                             org.jboss.weld.bean.builtin;
+                             org.jboss.weld.bean.proxy;
+                             org.jboss.weld.*.api.*;
+                             org.jboss.weld.*.spi.*;
+                             org.jboss.weld.conversation;
+                             org.jboss.weld;
+                             org.jboss.weld.bootstrap;
+                             org.jboss.weld.event;
+                             org.jboss.weld.injection;
+                             org.jboss.weld.introspector;
+                             org.jboss.weld.introspector.jlr;
+                             org.jboss.weld.manager;
+                             org.jboss.weld.servlet;
+                             org.jboss.weld.util;
+                             org.jboss.interceptor.*;
+                             version=1.4.0,
+                             org.jboss.weld.el;
+                             version=1.4.0,
+                             org.jboss.weld.jsf;
+                             version=1.4.0
+                        </_exportcontents>
+                        <Import-Package>
+                             org.slf4j; org.slf4j.spi; org.slf4j.helpers; version=1.5.10; resolution:=optional,
+                             ch.qos.cal10n; version=0.7.2; resolution:=optional,
+                             javax.interceptor.*, *;
+                             resolution:=optional
+                        </Import-Package>
                         <Export-Package>com.serli.osgi.cdi.*</Export-Package>
-                        <Export-Package>javax.enterprise.*</Export-Package>
-                        <Export-Package>javax.decorator</Export-Package>
-                        <Export-Package>javax.inject</Export-Package>
-                        <Export-Package>javax.interceptor</Export-Package>
-                        <Export-Package>javax.el</Export-Package>
-                        <Export-Package>javax.annotation.*</Export-Package>
                         <Bundle-Activator>com.serli.osgi.cdi.activator.CheckerActivator</Bundle-Activator>
+                        <Private-Package>
+                            !javax.interceptor.*, org.slf4j.*; -split-package:=merge-first, ch.qos.cal10n.*
+                        </Private-Package>
                     </instructions>
+                    <unpackBundle>true</unpackBundle>
                 </configuration>
             </plugin>
             <plugin>
@@ -89,19 +160,6 @@
                 <artifactId>maven-antrun-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>runfelix</id>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                        <configuration>
-                            <tasks>
-                                <echo>prout</echo>
-                                <java jar="target/osgi-cdi-1.0-SNAPSHOT-all/osgi-cdi-1.0-SNAPSHOT/bin/felix.jar">
-                                </java>
-                            </tasks>
-                        </configuration>
-                    </execution>
-                    <execution>
                         <id>compile</id>
                         <phase>install</phase>
                         <goals>
@@ -109,7 +167,7 @@
                         </goals>
                         <configuration>
                             <tasks>
-                                <property name="plugins" refid="maven.runtime.classpath"/>
+                                <!--<property name="plugins" refid="maven.runtime.classpath"/>
                                 <pathconvert pathsep=" " dirsep="/" property="project.build.url">
                                     <path path="${project.build.directory}"/>
                                 </pathconvert>
@@ -146,7 +204,8 @@
                                             felix.auto.install= ${bundles}
 
                                             felix.auto.start=file:modules/${project.artifactId}-${project.version}.jar
-                                </echo>
+                                </echo>-->
+                                <copy file="src/main/resources/config.properties" tofile="${project.build.directory}/config.properties"/>
                                 <copy file="${maven.dependency.org.apache.felix.org.apache.felix.main.jar.path}" tofile="${project.build.directory}/felix.jar"/>
                             </tasks>
                         </configuration>
@@ -174,6 +233,19 @@
             </plugin>
         </plugins>
     </build>
+    <repositories>
+        <repository>
+            <id>jboss-public-repository-group</id>
+            <name>JBoss Public Maven Repository Group</name>
+            <url>http://repository.jboss.org/nexus/content/groups/public</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>

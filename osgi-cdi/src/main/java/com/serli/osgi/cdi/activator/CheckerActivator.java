@@ -23,6 +23,7 @@ public class CheckerActivator implements BundleActivator {
         weld = new Weld();
         container = weld.initialize();
         gui = container.instance().select(SpellCheckerGui.class).get();
+        gui.start();
     }
 
     @Override

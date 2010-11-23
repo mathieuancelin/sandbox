@@ -9,9 +9,11 @@
     <dependencySet>
         <useProjectArtifact>false</useProjectArtifact>
         <outputDirectory>modules</outputDirectory>
-        <excludes>
-          <exclude>org.apache.felix:org.apache.felix.main</exclude>
-        </excludes>
+        <includes>
+          <include>org.apache.felix.gogo:org.apache.felix.gogo.commands</include>
+          <include>org.apache.felix.gogo:org.apache.felix.gogo.runtime</include>
+          <include>com.serli.osgi:osgi-cdi</include>
+        </includes>
     </dependencySet>
     <dependencySet>
         <useProjectArtifact>false</useProjectArtifact>

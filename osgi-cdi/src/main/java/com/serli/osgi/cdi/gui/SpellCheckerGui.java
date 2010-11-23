@@ -5,7 +5,6 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
-import javax.inject.Singleton;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
