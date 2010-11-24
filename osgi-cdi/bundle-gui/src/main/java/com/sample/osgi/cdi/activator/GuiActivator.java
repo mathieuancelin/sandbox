@@ -37,7 +37,7 @@ public class GuiActivator implements BundleActivator {
 
     @Override
     public void start(BundleContext context) throws Exception {
-        startWeld();
+        //startWeld();
         //service1 = container.instance().select(Service1.class).get();
         //service2 = container.instance().select(Service2.class).get();
         gui = new SpellCheckerGui();
@@ -57,16 +57,16 @@ public class GuiActivator implements BundleActivator {
         this.bootstrap.startContainer(Environments.SE, deployment, this.applicationBeanStore);
         BeanDeploymentArchive mainBeanDepArch = (BeanDeploymentArchive) deployment.getBeanDeploymentArchives().get(0);
         this.manager = this.bootstrap.getManager(mainBeanDepArch);
-        this.bootstrap.startInitialization();
-        this.bootstrap.deployBeans();
-        ((ShutdownManager)WeldManagerUtils.getInstanceByType(this.manager, ShutdownManager.class, new Annotation[0])).setBootstrap(this.bootstrap);
-        this.bootstrap.validateBeans();
-        this.bootstrap.endInitialization();
         manager.createAnnotatedType(ShutdownManager.class);
         manager.createAnnotatedType(ParametersFactory.class);
         manager.createAnnotatedType(InstanceManager.class);
         manager.createAnnotatedType(Weld.class);
         manager.createAnnotatedType(RunnableDecorator.class);
+        this.bootstrap.startInitialization();
+        this.bootstrap.deployBeans();
+        ((ShutdownManager)WeldManagerUtils.getInstanceByType(this.manager, ShutdownManager.class, new Annotation[0])).setBootstrap(this.bootstrap);
+        this.bootstrap.validateBeans();
+        this.bootstrap.endInitialization();
         instanceManager = (InstanceManager)WeldManagerUtils.getInstanceByType(this.manager, InstanceManager.class, new Annotation[0]);
     }
 }
