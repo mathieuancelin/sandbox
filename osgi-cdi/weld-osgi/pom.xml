@@ -59,17 +59,6 @@
             <artifactId>jboss-interceptor-core</artifactId>
             <version>2.0.0.Alpha3</version>
         </dependency>
-        <dependency>
-            <groupId>org.apache.felix</groupId>
-            <artifactId>org.osgi.core</artifactId>
-            <version>1.2.0</version>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.8.1</version>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -81,7 +70,7 @@
                 <configuration>
                     <instructions>
                         <_include>-osgi.bundle</_include>
-                        <Embed-Dependency>*; scope=compile; inline=true, slf4j-jdk14; inline=true</Embed-Dependency>                      
+                        <Embed-Dependency>*; scope=compile; inline=true, slf4j-jdk14; inline=true; inline=false, artifactId=!org.osgi.core</Embed-Dependency>
                         <_exportcontents>
                              javax.inject;
                              javax.decorator;
@@ -92,14 +81,14 @@
                              org.jboss.weld.bean;
                              org.jboss.weld.bean.builtin;
                              org.jboss.weld.bean.proxy;
-                             org.jboss.weld.*.api.*;
-                             org.jboss.weld.*.spi.*;
-                             org.jboss.weld.conversation;
-                             org.jboss.weld;
                              org.jboss.weld.environment.se;
                              org.jboss.weld.environment.se.*;
                              org.jboss.weld.bootstrap;
                              org.jboss.weld.bootstrap.*;
+                             org.jboss.weld.*.api.*;
+                             org.jboss.weld.*.spi.*;
+                             org.jboss.weld.conversation;
+                             org.jboss.weld;
                              org.jboss.weld.event;
                              org.jboss.weld.injection;
                              org.jboss.weld.introspector;
@@ -120,7 +109,6 @@
                              javax.interceptor.*, *;
                              resolution:=optional
                         </Import-Package>
-                        <Bundle-Activator>com.serli.osgi.cdi.activator.CheckerActivator</Bundle-Activator>
                         <Private-Package>
                             !javax.interceptor.*, org.slf4j.*; -split-package:=merge-first, ch.qos.cal10n.*
                         </Private-Package>

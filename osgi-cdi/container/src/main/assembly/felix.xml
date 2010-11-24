@@ -2,7 +2,6 @@
 <assembly>
  <id>all</id>
   <formats>
-    <!--<format>zip</format>-->
     <format>dir</format>
   </formats>
   <dependencySets>
@@ -28,10 +27,6 @@
     </dependencySet>
   </dependencySets>
   <files>
-    <file>
-      <source>${project.build.directory}/${project.artifactId}-${project.version}.jar</source>
-      <outputDirectory>modules</outputDirectory>
-    </file>
     <file>
       <source>${project.build.directory}/felix.jar</source>
       <outputDirectory>bin</outputDirectory>

@@ -16,7 +16,6 @@ public class SpellActivator implements BundleActivator {
     public void start(BundleContext context) throws Exception {
         SpellCheckerServiceImpl service = new SpellCheckerServiceImpl();
         service.setDictionaryService((DictionaryService) context.getService(context.getServiceReference(DictionaryService.class.getName())));
-        System.out.println(service.getDictionaryService());
         context.registerService(SpellCheckerService.class.getName(), service, null);
     }
 
