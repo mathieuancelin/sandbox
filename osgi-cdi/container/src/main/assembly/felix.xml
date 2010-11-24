@@ -16,6 +16,7 @@
           <include>com.sample.osgi:bundle2</include>
           <include>com.sample.osgi:bundle-api</include>
           <include>com.sample.osgi:gui</include>
+          <include>com.sample.osgi:weld-osgi</include>
         </includes>
     </dependencySet>
     <dependencySet>

@@ -96,7 +96,10 @@
                              org.jboss.weld.*.spi.*;
                              org.jboss.weld.conversation;
                              org.jboss.weld;
+                             org.jboss.weld.environment.se;
+                             org.jboss.weld.environment.se.*;
                              org.jboss.weld.bootstrap;
+                             org.jboss.weld.bootstrap.*;
                              org.jboss.weld.event;
                              org.jboss.weld.injection;
                              org.jboss.weld.introspector;

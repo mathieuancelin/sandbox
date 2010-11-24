@@ -79,11 +79,16 @@ public class SpellCheckerGui extends JFrame {
     }
 
     private void check() {
-        List<String> wrong = spellService.check(input.getText());
-        if (result != null) {
-            result.setText(wrong.size() + " word(s) are mispelled");
-        } else {
-            result.setText("All words are correct");
+        String text = input.getText();
+        if (text == null)
+            text = "";
+        List<String> wrong = spellService.check(text);
+        if (wrong != null) {
+            if (result != null) {
+                result.setText(wrong.size() + " word(s) are mispelled");
+            } else {
+                result.setText("All words are correct");
+            }
         }
     }
 
