@@ -73,28 +73,28 @@ public class WeldSEResourceLoader implements ResourceLoader
    
    public URL getResource(String name)
    {
-      if (Thread.currentThread().getContextClassLoader() != null)
-      {
-         return Thread.currentThread().getContextClassLoader().getResource(name);
-      }
-      else
-      {
+//      if (Thread.currentThread().getContextClassLoader() != null)
+//      {
+//         return Thread.currentThread().getContextClassLoader().getResource(name);
+//      }
+//      else
+//      {
          return getClass().getResource(name);
-      }
+//      }
    }
    
    public Collection<URL> getResources(String name)
    {
       try
       {
-         if (Thread.currentThread().getContextClassLoader() != null)
-         {
-            return new EnumerationList<URL>(Thread.currentThread().getContextClassLoader().getResources(name));
-         }
-         else
-         {
+//         if (Thread.currentThread().getContextClassLoader() != null)
+//         {
+//            return new EnumerationList<URL>(Thread.currentThread().getContextClassLoader().getResources(name));
+//         }
+//         else
+//         {
             return new EnumerationList<URL>(getClass().getClassLoader().getResources(name));
-         }
+//         }
       }
       catch (IOException e)
       {

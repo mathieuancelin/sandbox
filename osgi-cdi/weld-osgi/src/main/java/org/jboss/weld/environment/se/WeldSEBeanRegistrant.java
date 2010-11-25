@@ -16,6 +16,7 @@
  */
 package org.jboss.weld.environment.se;
 
+import com.sample.osgi.cdi.activator.Starter;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.AfterBeanDiscovery;
 import javax.enterprise.inject.spi.BeanManager;
@@ -39,6 +40,7 @@ public class WeldSEBeanRegistrant implements Extension
    public void registerWeldSEBeans(@Observes BeforeBeanDiscovery event, BeanManager manager)
    {
        System.out.println("before bean disc");
+      event.addAnnotatedType(manager.createAnnotatedType(Starter.class));
       event.addAnnotatedType(manager.createAnnotatedType(ShutdownManager.class));
       event.addAnnotatedType(manager.createAnnotatedType(ParametersFactory.class));
       event.addAnnotatedType(manager.createAnnotatedType(InstanceManager.class));

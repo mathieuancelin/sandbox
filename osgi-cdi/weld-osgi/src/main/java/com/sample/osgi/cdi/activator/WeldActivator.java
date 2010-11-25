@@ -14,9 +14,12 @@ public class WeldActivator implements BundleActivator {
 
     private WeldContainer weld;
 
+    private Starter gui;
+
     @Override
     public void start(BundleContext context) throws Exception {
         startWeld();
+        gui = weld.instance().select(Starter.class).get();
     }
 
     @Override
