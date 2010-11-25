@@ -15,14 +15,9 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>com.sample.osgi</groupId>
-            <artifactId>weld-osgi</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
             <groupId>org.apache.felix</groupId>
             <artifactId>org.osgi.core</artifactId>
-            <version>1.2.0</version>
+            <version>1.4.0</version>
         </dependency>
     </dependencies>
     <build>
@@ -42,13 +37,6 @@
                         <Import-Package>
                             com.sample.osgi.cdi.services;
                             org.osgi.framework; javax.swing;
-                            org.jboss.weld.environment.se.*;
-                            org.jboss.weld.bootstrap.*;
-                            javax.enterprise.inject.spi;
-                            javax.enterprise.context.spi;
-                            org.jboss.weld.context.api;
-                            org.jboss.weld.context.api.helpers;
-                            org.jboss.weld.manager.api;
                         </Import-Package>
                         <Bundle-Activator>com.sample.osgi.cdi.activator.GuiActivator</Bundle-Activator>
                     </instructions>

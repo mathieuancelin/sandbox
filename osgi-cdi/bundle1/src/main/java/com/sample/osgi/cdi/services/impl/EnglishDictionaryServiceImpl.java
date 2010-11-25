@@ -23,6 +23,7 @@ public class EnglishDictionaryServiceImpl implements DictionaryService {
 
     @Override
     public boolean checkWord(String word) {
+        System.out.println("checking v 1");
         word = word.toLowerCase();
         for (String oneWord : words) {
             if (oneWord.equals(word)) {

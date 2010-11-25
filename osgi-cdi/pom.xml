@@ -15,5 +15,6 @@
         <module>bundle-api</module>
         <module>container</module>
         <module>weld-osgi</module>
+        <module>weld-bundle</module>
     </modules>
 </project>

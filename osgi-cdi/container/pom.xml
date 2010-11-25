@@ -31,7 +31,7 @@
         </dependency>
         <dependency>
             <groupId>com.sample.osgi</groupId>
-            <artifactId>weld-osgi</artifactId>
+            <artifactId>weld-bundle</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>

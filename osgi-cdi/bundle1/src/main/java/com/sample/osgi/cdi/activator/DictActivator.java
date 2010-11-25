@@ -13,7 +13,8 @@ public class DictActivator implements BundleActivator {
 
     @Override
     public void start(BundleContext context) throws Exception {
-        context.registerService(DictionaryService.class.getName(), new EnglishDictionaryServiceImpl(), null);
+        context.registerService(DictionaryService.class.getName(), 
+                new EnglishDictionaryServiceImpl(), null);
     }
 
     @Override
