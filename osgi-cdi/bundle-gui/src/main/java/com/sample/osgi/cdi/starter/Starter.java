@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package com.sample.osgi.cdi.activator;
+package com.sample.osgi.cdi.starter;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;

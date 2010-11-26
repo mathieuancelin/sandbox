@@ -19,7 +19,6 @@ package org.jboss.weld.environment.se.discovery;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 import org.jboss.weld.bootstrap.spi.BeanDeploymentArchive;
 import org.jboss.weld.bootstrap.spi.BeansXml;
@@ -38,38 +37,35 @@ import org.jboss.weld.bootstrap.spi.Deployment;
  * @author Pete Muir
  * 
  */
-public class ImmutableBeanDeploymentArchive extends AbstractWeldSEBeanDeploymentArchive
-{
+public class ImmutableBeanDeploymentArchive extends AbstractWeldSEBeanDeploymentArchive {
 
-   private final Collection<String> beanClasses;
-   private final BeansXml beansXml;
-   private final Collection<BeanDeploymentArchive> beanDeploymentArchives;
+    private final Collection<String> beanClasses;
+    private final BeansXml beansXml;
+    private final Collection<BeanDeploymentArchive> beanDeploymentArchives;
 
-   public ImmutableBeanDeploymentArchive(String id, Collection<String> beanClasses, BeansXml beansXml, Collection<BeanDeploymentArchive> beanDeploymentArchives)
-   {
-      super(id);
-      this.beanClasses = beanClasses;
-      this.beansXml = beansXml;
-      this.beanDeploymentArchives = beanDeploymentArchives;
-   }
+    public ImmutableBeanDeploymentArchive(String id, Collection<String> beanClasses, BeansXml beansXml, Collection<BeanDeploymentArchive> beanDeploymentArchives) {
+        super(id);
+        this.beanClasses = beanClasses;
+        this.beansXml = beansXml;
+        this.beanDeploymentArchives = beanDeploymentArchives;
+    }
 
-   public ImmutableBeanDeploymentArchive(String id, Collection<String> beanClasses, BeansXml beansXml)
-   {
-      this(id, beanClasses, beansXml, new ArrayList<BeanDeploymentArchive>());
-   }
+    public ImmutableBeanDeploymentArchive(String id, Collection<String> beanClasses, BeansXml beansXml) {
+        this(id, beanClasses, beansXml, new ArrayList<BeanDeploymentArchive>());
+    }
 
-   public Collection<String> getBeanClasses()
-   {
-      return Collections.unmodifiableCollection(beanClasses);
-   }
+    @Override
+    public Collection<String> getBeanClasses() {
+        return Collections.unmodifiableCollection(beanClasses);
+    }
 
-   public Collection<BeanDeploymentArchive> getBeanDeploymentArchives()
-   {
-      return Collections.unmodifiableCollection(beanDeploymentArchives);
-   }
+    @Override
+    public Collection<BeanDeploymentArchive> getBeanDeploymentArchives() {
+        return Collections.unmodifiableCollection(beanDeploymentArchives);
+    }
 
-   public BeansXml getBeansXml()
-   {
-      return beansXml;
-   }
+    @Override
+    public BeansXml getBeansXml() {
+        return beansXml;
+    }
 }

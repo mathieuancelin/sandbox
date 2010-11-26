@@ -21,31 +21,28 @@ import org.jboss.weld.ejb.spi.EjbDescriptor;
  * @author Pete Muir
  * 
  */
-public abstract class AbstractWeldSEBeanDeploymentArchive implements BeanDeploymentArchive
-{
+public abstract class AbstractWeldSEBeanDeploymentArchive implements BeanDeploymentArchive {
 
-   private final ServiceRegistry serviceRegistry;
-   private final String id;
+    private final ServiceRegistry serviceRegistry;
+    private final String id;
 
-   public AbstractWeldSEBeanDeploymentArchive(String id)
-   {
-      this.id = id;
-      this.serviceRegistry = new SimpleServiceRegistry();
-   }
+    public AbstractWeldSEBeanDeploymentArchive(String id) {
+        this.id = id;
+        this.serviceRegistry = new SimpleServiceRegistry();
+    }
 
-   public Collection<EjbDescriptor<?>> getEjbs()
-   {
-      return Collections.emptyList();
-   }
+    @Override
+    public Collection<EjbDescriptor<?>> getEjbs() {
+        return Collections.emptyList();
+    }
 
-   public String getId()
-   {
-      return id;
-   }
+    @Override
+    public String getId() {
+        return id;
+    }
 
-   public ServiceRegistry getServices()
-   {
-      return serviceRegistry;
-   }
-
+    @Override
+    public ServiceRegistry getServices() {
+        return serviceRegistry;
+    }
 }

@@ -1,7 +1,11 @@
 package com.sample.osgi.cdi.gui;
 
 import com.sample.osgi.cdi.services.SpellCheckerService;
+import com.sample.osgi.cdi.services.SpellCheckerSubstituteImpl;
+import com.sample.osgi.cdi.starter.PaymentService;
 import java.util.List;
+import javax.annotation.PostConstruct;
+import javax.inject.Inject;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -20,6 +24,12 @@ public class SpellCheckerGui extends JFrame {
     private JLabel result = null;
 
     private SpellCheckerService spellService;
+
+    @Inject
+    private PaymentService payment;
+
+    @Inject
+    private SpellCheckerSubstituteImpl subst;
 
     public SpellCheckerGui() {
         super();
@@ -51,6 +61,8 @@ public class SpellCheckerGui extends JFrame {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
                 check();
+                payment.pay(4321);
+                subst.sayHello();
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -92,6 +104,7 @@ public class SpellCheckerGui extends JFrame {
         }
     }
 
+    @PostConstruct
     public void start() {
         this.setVisible(true);
     }

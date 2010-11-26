@@ -16,9 +16,6 @@
  */
 package org.jboss.weld.environment.se;
 
-import com.sample.osgi.cdi.activator.BanklogServiceImpl;
-import com.sample.osgi.cdi.activator.PaypalServiceImpl;
-import com.sample.osgi.cdi.activator.Starter;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.AfterBeanDiscovery;
 import javax.enterprise.inject.spi.BeanManager;
@@ -26,7 +23,6 @@ import javax.enterprise.inject.spi.BeforeBeanDiscovery;
 import javax.enterprise.inject.spi.Extension;
 
 import org.jboss.weld.environment.se.beans.InstanceManager;
-import org.jboss.weld.environment.se.beans.ParametersFactory;
 import org.jboss.weld.environment.se.contexts.ThreadContext;
 import org.jboss.weld.environment.se.threading.RunnableDecorator;
 
@@ -34,32 +30,22 @@ import org.jboss.weld.environment.se.threading.RunnableDecorator;
  * Explicitly registers all of the 'built-in' Java SE related beans and contexts.
  * @author Peter Royle
  */
-public class WeldSEBeanRegistrant implements Extension
-{
+public class WeldSEBeanRegistrant implements Extension {
 
-   public static ThreadContext THREAD_CONTEXT = null;
+    public static ThreadContext THREAD_CONTEXT = null;
 
-   public void registerWeldSEBeans(@Observes BeforeBeanDiscovery event, BeanManager manager)
-   {
-       System.out.println("before bean disc");
-      event.addAnnotatedType(manager.createAnnotatedType(Starter.class));
-      event.addAnnotatedType(manager.createAnnotatedType(PaypalServiceImpl.class));
-      event.addAnnotatedType(manager.createAnnotatedType(BanklogServiceImpl.class));
-      event.addAnnotatedType(manager.createAnnotatedType(ShutdownManager.class));
-      event.addAnnotatedType(manager.createAnnotatedType(ParametersFactory.class));
-      event.addAnnotatedType(manager.createAnnotatedType(InstanceManager.class));
-      event.addAnnotatedType(manager.createAnnotatedType(RunnableDecorator.class));
-      event.addAnnotatedType(manager.createAnnotatedType(WeldContainer.class));
-   }
+    public void registerWeldSEBeans(@Observes BeforeBeanDiscovery event, BeanManager manager) {
+        event.addAnnotatedType(manager.createAnnotatedType(ShutdownManager.class));
+        event.addAnnotatedType(manager.createAnnotatedType(InstanceManager.class));
+        event.addAnnotatedType(manager.createAnnotatedType(RunnableDecorator.class));
+        event.addAnnotatedType(manager.createAnnotatedType(WeldContainer.class));
+    } // TODO : add @OSGiService Qualifier
 
-   public void registerWeldSEContexts(@Observes AfterBeanDiscovery event)
-   {
-       System.out.println("after bean disc");
-      // set up this thread's bean store
-      final ThreadContext threadContext = new ThreadContext();
-
-      // activate and add context
-      event.addContext(threadContext);
-      THREAD_CONTEXT = threadContext;
-   }
+    public void registerWeldSEContexts(@Observes AfterBeanDiscovery event) {
+        // set up this thread's bean store
+        final ThreadContext threadContext = new ThreadContext();
+        // activate and add context
+        event.addContext(threadContext);
+        THREAD_CONTEXT = threadContext;
+    }
 }

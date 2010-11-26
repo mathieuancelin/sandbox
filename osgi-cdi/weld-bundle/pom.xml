@@ -118,12 +118,12 @@
                              org.jboss.weld.bean.builtin;
                              org.jboss.weld.bean.proxy;
                              org.jboss.weld.environment.se;
+                             org.jboss.weld.environment.osgi;
                              org.jboss.weld.environment.se.*;
                              org.jboss.weld.bootstrap;
                              org.jboss.weld.bootstrap.*;
                              org.jboss.weld.*.api.*;
                              org.jboss.weld.*.spi.*;
-                             org.jboss.weld.conversation;
                              org.jboss.weld;
                              org.jboss.weld.event;
                              org.jboss.weld.injection;
@@ -148,7 +148,8 @@
                         <Private-Package>
                             !javax.interceptor.*, org.slf4j.*; -split-package:=merge-first, ch.qos.cal10n.*
                         </Private-Package>
-                        <Bundle-Activator>com.sample.osgi.cdi.activator.WeldActivator</Bundle-Activator>
+                        <DynamicImport-Package>*</DynamicImport-Package>
+                        <Bundle-Activator>org.jboss.weld.environment.osgi.WeldActivator</Bundle-Activator>
                     </instructions>
                     <unpackBundle>true</unpackBundle>
                 </configuration>

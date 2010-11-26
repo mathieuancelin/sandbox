@@ -7,7 +7,6 @@ import org.jboss.weld.bootstrap.api.ServiceRegistry;
 import org.jboss.weld.bootstrap.api.helpers.SimpleServiceRegistry;
 import org.jboss.weld.bootstrap.spi.Deployment;
 import org.jboss.weld.bootstrap.spi.Metadata;
-import org.jboss.weld.environment.se.discovery.url.WeldSEResourceLoader;
 
 /**
  * Implements the basic requirements of a {@link Deployment}. Provides a service
@@ -19,30 +18,24 @@ import org.jboss.weld.environment.se.discovery.url.WeldSEResourceLoader;
  * @author Pete Muir
  * 
  */
-public abstract class AbstractWeldSEDeployment implements Deployment
-{
+public abstract class AbstractWeldSEDeployment implements Deployment {
 
-   public static final String[] RESOURCES = { "META-INF/beans.xml" };
+    public static final String[] RESOURCES = {"META-INF/beans.xml"};
+    private final ServiceRegistry serviceRegistry;
+    private final Iterable<Metadata<Extension>> extensions;
 
-   private final ServiceRegistry serviceRegistry;
-   private final Iterable<Metadata<Extension>> extensions;
+    public AbstractWeldSEDeployment(Bootstrap bootstrap) {
+        this.serviceRegistry = new SimpleServiceRegistry();
+        this.extensions = bootstrap.loadExtensions(getClass().getClassLoader());
+    }
 
-   public AbstractWeldSEDeployment(Bootstrap bootstrap)
-   {
-      this.serviceRegistry = new SimpleServiceRegistry();
-      //this.extensions = bootstrap.loadExtensions(WeldSEResourceLoader.getClassLoader());
-      this.extensions = bootstrap.loadExtensions(getClass().getClassLoader());
-   }
+    @Override
+    public ServiceRegistry getServices() {
+        return serviceRegistry;
+    }
 
-   public ServiceRegistry getServices()
-   {
-      return serviceRegistry;
-   }
-      
-   public Iterable<Metadata<Extension>> getExtensions()
-   {
-      return extensions;
-   }
-
-
+    @Override
+    public Iterable<Metadata<Extension>> getExtensions() {
+        return extensions;
+    }
 }

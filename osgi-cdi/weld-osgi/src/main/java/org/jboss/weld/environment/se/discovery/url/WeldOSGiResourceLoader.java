@@ -28,22 +28,22 @@ import org.osgi.framework.BundleContext;
 /**
  * A simple resource loader.
  * 
- * Uses {@link WeldSEResourceLoader}'s classloader if the Thread Context 
+ * Uses {@link WeldOSGiResourceLoader}'s classloader if the Thread Context
  * Classloader isn't available
  * 
  * @author Pete Muir
  *
  */
-public class WeldSEResourceLoader implements ResourceLoader {
+public class WeldOSGiResourceLoader implements ResourceLoader {
 
     private BundleContext context;
 
-    public WeldSEResourceLoader(BundleContext context) {
+    public WeldOSGiResourceLoader(BundleContext context) {
         this.context = context;
     }
 
+    @Override
     public Class<?> classForName(String name) {
-
         try {
             //Class<?> clazz = getClassLoader().loadClass(name);
             Class<?> clazz = getClass().getClassLoader().loadClass(name);
@@ -71,42 +71,21 @@ public class WeldSEResourceLoader implements ResourceLoader {
         }
     }
 
+    @Override
     public URL getResource(String name) {
-//      if (Thread.currentThread().getContextClassLoader() != null)
-//      {
-//         return Thread.currentThread().getContextClassLoader().getResource(name);
-//      }
-//      else
-//      {
         return context.getBundle().getResource(name);
-        //return getClass().getResource(name);
-//      }
     }
 
+    @Override
     public Collection<URL> getResources(String name) {
         try {
-//         if (Thread.currentThread().getContextClassLoader() != null)
-//         {
-//            return new EnumerationList<URL>(Thread.currentThread().getContextClassLoader().getResources(name));
-//         }
-//         else
-//         {
-            //return new EnumerationList<URL>(getClass().getClassLoader().getResources(name));
             return new EnumerationList<URL>(context.getBundle().getResources(name));
-//         }
         } catch (IOException e) {
             throw new ResourceLoadingException(e);
         }
     }
 
+    @Override
     public void cleanup() {
-    }
-
-    public static ClassLoader getClassLoader() {
-        if (Thread.currentThread().getContextClassLoader() != null) {
-            return Thread.currentThread().getContextClassLoader();
-        } else {
-            return WeldSEResourceLoader.getClassLoader();
-        }
     }
 }
