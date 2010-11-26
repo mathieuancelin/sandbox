@@ -16,6 +16,8 @@
  */
 package org.jboss.weld.environment.se;
 
+import com.sample.osgi.cdi.activator.BanklogServiceImpl;
+import com.sample.osgi.cdi.activator.PaypalServiceImpl;
 import com.sample.osgi.cdi.activator.Starter;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.AfterBeanDiscovery;
@@ -41,6 +43,8 @@ public class WeldSEBeanRegistrant implements Extension
    {
        System.out.println("before bean disc");
       event.addAnnotatedType(manager.createAnnotatedType(Starter.class));
+      event.addAnnotatedType(manager.createAnnotatedType(PaypalServiceImpl.class));
+      event.addAnnotatedType(manager.createAnnotatedType(BanklogServiceImpl.class));
       event.addAnnotatedType(manager.createAnnotatedType(ShutdownManager.class));
       event.addAnnotatedType(manager.createAnnotatedType(ParametersFactory.class));
       event.addAnnotatedType(manager.createAnnotatedType(InstanceManager.class));

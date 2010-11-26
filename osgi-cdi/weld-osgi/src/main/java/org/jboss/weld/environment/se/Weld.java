@@ -31,6 +31,7 @@ import org.jboss.weld.bootstrap.spi.Deployment;
 import org.jboss.weld.environment.se.discovery.url.WeldSEResourceLoader;
 import org.jboss.weld.environment.se.discovery.url.WeldSEUrlDeployment;
 import org.jboss.weld.resources.spi.ResourceLoader;
+import org.osgi.framework.BundleContext;
 
 /**
  * <p>
@@ -62,9 +63,9 @@ public class Weld
     * Boots Weld and creates and returns a WeldContainer instance, through which
     * beans and events can be accessed.
     */
-   public WeldContainer initialize()
+   public WeldContainer initialize(BundleContext context)
    {
-      ResourceLoader resourceLoader = new WeldSEResourceLoader();
+      ResourceLoader resourceLoader = new WeldSEResourceLoader(context);
       Bootstrap bootstrap = null;
 //      try
 //      {

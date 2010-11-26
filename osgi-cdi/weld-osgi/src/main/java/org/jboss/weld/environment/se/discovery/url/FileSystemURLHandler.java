@@ -80,6 +80,7 @@ public class FileSystemURLHandler
       try
       {
          log.trace("archive: " + file);
+          System.out.println("archive: " + file.getAbsolutePath());
 
          String archiveUrl = "jar:" + file.toURI().toURL().toExternalForm() + "!/";
          ZipFile zip = new ZipFile(file);
@@ -94,7 +95,8 @@ public class FileSystemURLHandler
       }
       catch (ZipException e)
       {
-         throw new RuntimeException("Error handling file " + file, e);
+         e.printStackTrace();
+         //throw new RuntimeException("Error handling file " + file, e);
       }
    }
 

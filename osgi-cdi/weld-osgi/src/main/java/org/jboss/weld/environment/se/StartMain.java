@@ -42,7 +42,7 @@ public class StartMain
 
     public WeldContainer go()
     {
-        WeldContainer weld = new Weld().initialize();
+        WeldContainer weld = new Weld().initialize(null);
         weld.event().select(ContainerInitialized.class).fire(new ContainerInitialized());
         return weld;
     }

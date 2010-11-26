@@ -35,11 +35,11 @@
     <!-- ############### Weld logging ################### -->
 
     <category name="org.jboss.weld">
-        <priority value="INFO"/>
+        <priority value="DEBUG"/>
     </category>
     
     <root>
-        <priority value="INFO"/>
+        <priority value="DEBUG"/>
         <appender-ref ref="CONSOLE"/>
     </root>
 

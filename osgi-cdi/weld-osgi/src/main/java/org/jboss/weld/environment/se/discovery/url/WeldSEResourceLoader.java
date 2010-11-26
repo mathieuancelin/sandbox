@@ -23,6 +23,7 @@ import java.util.Collection;
 import org.jboss.weld.resources.spi.ResourceLoader;
 import org.jboss.weld.resources.spi.ResourceLoadingException;
 import org.jboss.weld.util.collections.EnumerationList;
+import org.osgi.framework.BundleContext;
 
 /**
  * A simple resource loader.
@@ -33,87 +34,79 @@ import org.jboss.weld.util.collections.EnumerationList;
  * @author Pete Muir
  *
  */
-public class WeldSEResourceLoader implements ResourceLoader
-{
-   
-   public Class<?> classForName(String name)
-   {
-      
-      try
-      {
-         Class<?> clazz = getClassLoader().loadClass(name);
-         // if the class relies on optional dependencies that are not present
-         // then a CNFE can be thrown later in the deployment process when the
-         // Introspector is inspecting the class. We call getMethods, getFields
-         // and getConstructors now over the whole type heirachey to force 
-         // these errors to occur early. 
-         // NOTE it is still possible for a CNFE to be thrown at runtime if
-         // a class has methods that refer to classes that are not present in
-         // their bytecode, this only checks for classes that form part of the
-         // class schema that are not present
-         Class<?> obj = clazz;
-         while (obj != null && obj != Object.class)
-         {
-            obj.getDeclaredConstructors();
-            obj.getDeclaredFields();
-            obj.getDeclaredMethods();
-            obj = obj.getSuperclass();
-         }
-         return clazz;
-      }
-      catch (ClassNotFoundException e)
-      {
-         throw new ResourceLoadingException(e);
-      }
-      catch (NoClassDefFoundError e)
-      {
-         throw new ResourceLoadingException(e);
-      }
-   }
-   
-   public URL getResource(String name)
-   {
+public class WeldSEResourceLoader implements ResourceLoader {
+
+    private BundleContext context;
+
+    public WeldSEResourceLoader(BundleContext context) {
+        this.context = context;
+    }
+
+    public Class<?> classForName(String name) {
+
+        try {
+            //Class<?> clazz = getClassLoader().loadClass(name);
+            Class<?> clazz = getClass().getClassLoader().loadClass(name);
+            // if the class relies on optional dependencies that are not present
+            // then a CNFE can be thrown later in the deployment process when the
+            // Introspector is inspecting the class. We call getMethods, getFields
+            // and getConstructors now over the whole type heirachey to force
+            // these errors to occur early.
+            // NOTE it is still possible for a CNFE to be thrown at runtime if
+            // a class has methods that refer to classes that are not present in
+            // their bytecode, this only checks for classes that form part of the
+            // class schema that are not present
+            Class<?> obj = clazz;
+            while (obj != null && obj != Object.class) {
+                obj.getDeclaredConstructors();
+                obj.getDeclaredFields();
+                obj.getDeclaredMethods();
+                obj = obj.getSuperclass();
+            }
+            return clazz;
+        } catch (ClassNotFoundException e) {
+            throw new ResourceLoadingException(e);
+        } catch (NoClassDefFoundError e) {
+            throw new ResourceLoadingException(e);
+        }
+    }
+
+    public URL getResource(String name) {
 //      if (Thread.currentThread().getContextClassLoader() != null)
 //      {
 //         return Thread.currentThread().getContextClassLoader().getResource(name);
 //      }
 //      else
 //      {
-         return getClass().getResource(name);
+        return context.getBundle().getResource(name);
+        //return getClass().getResource(name);
 //      }
-   }
-   
-   public Collection<URL> getResources(String name)
-   {
-      try
-      {
+    }
+
+    public Collection<URL> getResources(String name) {
+        try {
 //         if (Thread.currentThread().getContextClassLoader() != null)
 //         {
 //            return new EnumerationList<URL>(Thread.currentThread().getContextClassLoader().getResources(name));
 //         }
 //         else
 //         {
-            return new EnumerationList<URL>(getClass().getClassLoader().getResources(name));
+            //return new EnumerationList<URL>(getClass().getClassLoader().getResources(name));
+            return new EnumerationList<URL>(context.getBundle().getResources(name));
 //         }
-      }
-      catch (IOException e)
-      {
-         throw new ResourceLoadingException(e);
-      }
-   }
-   
-   public void cleanup() {}
-   
-   public static ClassLoader getClassLoader()
-   {
-      if (Thread.currentThread().getContextClassLoader() != null)
-      {
-         return Thread.currentThread().getContextClassLoader();
-      }
-      else
-      {
-         return WeldSEResourceLoader.getClassLoader();
-      }
-   }
-   
+        } catch (IOException e) {
+            throw new ResourceLoadingException(e);
+        }
+    }
+
+    public void cleanup() {
+    }
+
+    public static ClassLoader getClassLoader() {
+        if (Thread.currentThread().getContextClassLoader() != null) {
+            return Thread.currentThread().getContextClassLoader();
+        } else {
+            return WeldSEResourceLoader.getClassLoader();
+        }
+    }
 }
