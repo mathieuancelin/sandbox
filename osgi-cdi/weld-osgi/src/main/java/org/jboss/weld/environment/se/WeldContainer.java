@@ -35,46 +35,41 @@ import org.jboss.weld.environment.se.beans.InstanceManager;
  *
  * @author Peter Royle
  */
-public class WeldContainer
-{
+public class WeldContainer {
 
-   private final InstanceManager instanceManager;
-   private final BeanManager beanManager;
+    private final InstanceManager instanceManager;
+    private final BeanManager beanManager;
 
-   @Inject
-   protected WeldContainer(InstanceManager instanceManager, BeanManager beanManager)
-   {
-      this.instanceManager = instanceManager;
-      this.beanManager = beanManager;
-   }
+    @Inject
+    protected WeldContainer(InstanceManager instanceManager, BeanManager beanManager) {
+        this.instanceManager = instanceManager;
+        this.beanManager = beanManager;
+    }
 
-   /**
-    * Provides access to all beans within the application. For example:
-    * <code>
-    * Foo foo = weld.instance().select(Foo.class).get();
-    * </code>
-    */
-   public Instance<Object> instance()
-   {
-      return instanceManager.getInstances();
-   }
+    /**
+     * Provides access to all beans within the application. For example:
+     * <code>
+     * Foo foo = weld.instance().select(Foo.class).get();
+     * </code>
+     */
+    public Instance<Object> instance() {
+        return instanceManager.getInstances();
+    }
 
-   /**
-    * Provides access to all events within the application. For example:
-    * <code>
-    * weld.event().select(Bar.class).fire(new Bar());
-    * </code>
-    */
-   public Event<Object> event()
-   {
-      return instanceManager.getEvents();
-   }
+    /**
+     * Provides access to all events within the application. For example:
+     * <code>
+     * weld.event().select(Bar.class).fire(new Bar());
+     * </code>
+     */
+    public Event<Object> event() {
+        return instanceManager.getEvents();
+    }
 
-   /**
-    * Provides direct access to the BeanManager.
-    */
-   public BeanManager getBeanManager()
-   {
-      return beanManager;
-   }
+    /**
+     * Provides direct access to the BeanManager.
+     */
+    public BeanManager getBeanManager() {
+        return beanManager;
+    }
 }

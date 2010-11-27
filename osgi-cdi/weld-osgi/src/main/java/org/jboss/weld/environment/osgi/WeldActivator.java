@@ -1,6 +1,7 @@
 package org.jboss.weld.environment.osgi;
 
 import org.jboss.weld.environment.se.ShutdownManager;
+import org.jboss.weld.environment.se.events.ContainerShutdown;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleEvent;
@@ -18,6 +19,8 @@ public class WeldActivator implements BundleActivator, BundleListener, ServiceLi
 
     private ShutdownManager manager;
 
+    // TODO : use log service
+
     @Override
     public void start(BundleContext context) throws Exception {
         context.addBundleListener(this);
@@ -30,11 +33,13 @@ public class WeldActivator implements BundleActivator, BundleListener, ServiceLi
 
     @Override
     public void stop(BundleContext context) throws Exception {
+        WeldContainerOwner.container().event().fire(new ContainerShutdown());
         manager.shutdown();
     }
 
     @Override
     public void bundleChanged(BundleEvent event) {
+        WeldContainerOwner.container().event().fire(event);
         switch (event.getType()) {
             case BundleEvent.INSTALLED:
                 System.out.print("Bundle INSTALLED => "); break;
@@ -63,6 +68,7 @@ public class WeldActivator implements BundleActivator, BundleListener, ServiceLi
 
     @Override
     public void serviceChanged(ServiceEvent event) {
+        WeldContainerOwner.container().event().fire(event);
         //System.out.println("Service changed : " + event.getType() + " => " + event.getServiceReference());
     }
 }

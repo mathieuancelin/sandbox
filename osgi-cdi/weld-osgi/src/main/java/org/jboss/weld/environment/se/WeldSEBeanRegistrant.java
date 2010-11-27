@@ -24,30 +24,27 @@ import javax.enterprise.inject.spi.Extension;
 import org.jboss.weld.environment.osgi.WeldStartMessage;
 
 import org.jboss.weld.environment.se.beans.InstanceManager;
-import org.jboss.weld.environment.se.contexts.ThreadContext;
-import org.jboss.weld.environment.se.threading.RunnableDecorator;
 
 /**
  * Explicitly registers all of the 'built-in' Java SE related beans and contexts.
+ * 
  * @author Peter Royle
  */
 public class WeldSEBeanRegistrant implements Extension {
 
-    public static ThreadContext THREAD_CONTEXT = null;
-
     public void registerWeldSEBeans(@Observes BeforeBeanDiscovery event, BeanManager manager) {
         event.addAnnotatedType(manager.createAnnotatedType(ShutdownManager.class));
         event.addAnnotatedType(manager.createAnnotatedType(InstanceManager.class));
-        event.addAnnotatedType(manager.createAnnotatedType(RunnableDecorator.class));
         event.addAnnotatedType(manager.createAnnotatedType(WeldContainer.class));
         event.addAnnotatedType(manager.createAnnotatedType(WeldStartMessage.class));
     } // TODO : add @OSGiService Qualifier
+    // TODO : add injection for service registry, context, bundle, log service, entreprise stuff
 
     public void registerWeldSEContexts(@Observes AfterBeanDiscovery event) {
-        // set up this thread's bean store
-        final ThreadContext threadContext = new ThreadContext();
-        // activate and add context
-        event.addContext(threadContext);
-        THREAD_CONTEXT = threadContext;
+//        // set up this thread's bean store
+//        final ThreadContext threadContext = new ThreadContext();
+//        // activate and add context
+//        event.addContext(threadContext);
+//        THREAD_CONTEXT = threadContext;
     }
 }
