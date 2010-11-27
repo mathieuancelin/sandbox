@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.weld.environment.se;
+package org.jboss.weld.environment.osgi;
 
 import java.lang.annotation.Annotation;
 import java.util.Arrays;
@@ -28,8 +28,8 @@ import org.jboss.weld.bootstrap.WeldBootstrap;
 import org.jboss.weld.bootstrap.api.Bootstrap;
 import org.jboss.weld.bootstrap.api.Environments;
 import org.jboss.weld.bootstrap.spi.Deployment;
-import org.jboss.weld.environment.se.discovery.url.WeldOSGiResourceLoader;
-import org.jboss.weld.environment.se.discovery.url.WeldOSGiBundleDeployment;
+import org.jboss.weld.environment.osgi.discovery.bundle.WeldOSGiResourceLoader;
+import org.jboss.weld.environment.osgi.discovery.bundle.WeldOSGiBundleDeployment;
 import org.jboss.weld.resources.spi.ResourceLoader;
 import org.osgi.framework.BundleContext;
 

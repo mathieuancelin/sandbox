@@ -14,14 +14,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.weld.environment.se.discovery.url;
+package org.jboss.weld.environment.osgi.discovery.bundle;
 
 import java.util.Collections;
 import java.util.List;
 
 import org.jboss.weld.bootstrap.api.Bootstrap;
 import org.jboss.weld.bootstrap.spi.BeanDeploymentArchive;
-import org.jboss.weld.environment.se.discovery.AbstractWeldSEDeployment;
+import org.jboss.weld.environment.osgi.discovery.AbstractWeldOSGiDeployment;
 import org.jboss.weld.resources.spi.ResourceLoader;
 import org.osgi.framework.BundleContext;
 
@@ -30,7 +30,7 @@ import org.osgi.framework.BundleContext;
  * 
  * @author Peter Royle
  */
-public class WeldOSGiBundleDeployment extends AbstractWeldSEDeployment {
+public class WeldOSGiBundleDeployment extends AbstractWeldOSGiDeployment {
 
     private final BeanDeploymentArchive beanDeploymentArchive;
 

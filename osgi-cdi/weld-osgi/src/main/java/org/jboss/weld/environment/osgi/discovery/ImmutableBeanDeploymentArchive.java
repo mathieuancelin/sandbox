@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.weld.environment.se.discovery;
+package org.jboss.weld.environment.osgi.discovery;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -37,7 +37,7 @@ import org.jboss.weld.bootstrap.spi.Deployment;
  * @author Pete Muir
  * 
  */
-public class ImmutableBeanDeploymentArchive extends AbstractWeldSEBeanDeploymentArchive {
+public class ImmutableBeanDeploymentArchive extends AbstractWeldOSGiBeanDeploymentArchive {
 
     private final Collection<String> beanClasses;
     private final BeansXml beansXml;

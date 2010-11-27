@@ -1,7 +1,6 @@
 package org.jboss.weld.environment.osgi;
 
-import org.jboss.weld.environment.se.ShutdownManager;
-import org.jboss.weld.environment.se.events.ContainerShutdown;
+import org.jboss.weld.environment.osgi.events.ContainerShutdown;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleEvent;
@@ -39,7 +38,11 @@ public class WeldActivator implements BundleActivator, BundleListener, ServiceLi
 
     @Override
     public void bundleChanged(BundleEvent event) {
-        WeldContainerOwner.container().event().fire(event);
+        if (WeldContainerOwner.container() != null)
+            WeldContainerOwner.container().event().fire(event);
+        // TODO : scan the bundle and add bindings
+        // TODO : register services in the registry
+        // TODO : start startable OSGiBeans
         switch (event.getType()) {
             case BundleEvent.INSTALLED:
                 System.out.print("Bundle INSTALLED => "); break;
@@ -68,7 +71,8 @@ public class WeldActivator implements BundleActivator, BundleListener, ServiceLi
 
     @Override
     public void serviceChanged(ServiceEvent event) {
-        WeldContainerOwner.container().event().fire(event);
+        if (WeldContainerOwner.container() != null)
+            WeldContainerOwner.container().event().fire(event);
         //System.out.println("Service changed : " + event.getType() + " => " + event.getServiceReference());
     }
 }

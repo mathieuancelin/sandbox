@@ -3,15 +3,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.sample.osgi</groupId>
-    <artifactId>weld-bundle</artifactId>
+    <groupId>org.jboss.weld.osgi</groupId>
+    <artifactId>weld-osgi</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>bundle</packaging>
-    <name>osgi-cdi :: weld-bundle</name>
+    <name>Weld OSGi :: Bundle</name>
     <dependencies>
         <dependency>
-            <groupId>com.sample.osgi</groupId>
-            <artifactId>weld-osgi</artifactId>
+            <groupId>org.jboss.weld.osgi</groupId>
+            <artifactId>weld-osgi-core</artifactId>
             <version>1.0-SNAPSHOT</version>
             <exclusions>
                 <exclusion>
@@ -117,9 +117,8 @@
                              org.jboss.weld.bean;
                              org.jboss.weld.bean.builtin;
                              org.jboss.weld.bean.proxy;
-                             org.jboss.weld.environment.se;
                              org.jboss.weld.environment.osgi;
-                             org.jboss.weld.environment.se.*;
+                             org.jboss.weld.environment.osgi.*;
                              org.jboss.weld.bootstrap;
                              org.jboss.weld.bootstrap.*;
                              org.jboss.weld.*.api.*;
@@ -179,6 +178,7 @@
             <url>http://repository.jboss.org/nexus/content/groups/public</url>
             <releases>
                 <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
             </releases>
             <snapshots>
                 <enabled>true</enabled>

@@ -1,4 +1,4 @@
-package org.jboss.weld.environment.se.discovery;
+package org.jboss.weld.environment.osgi.discovery;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -21,12 +21,12 @@ import org.jboss.weld.ejb.spi.EjbDescriptor;
  * @author Pete Muir
  * 
  */
-public abstract class AbstractWeldSEBeanDeploymentArchive implements BeanDeploymentArchive {
+public abstract class AbstractWeldOSGiBeanDeploymentArchive implements BeanDeploymentArchive {
 
     private final ServiceRegistry serviceRegistry;
     private final String id;
 
-    public AbstractWeldSEBeanDeploymentArchive(String id) {
+    public AbstractWeldOSGiBeanDeploymentArchive(String id) {
         this.id = id;
         this.serviceRegistry = new SimpleServiceRegistry();
     }

@@ -4,7 +4,7 @@ import com.sample.osgi.cdi.starter.Starter;
 import com.sample.osgi.cdi.gui.SpellCheckerGui;
 import com.sample.osgi.cdi.services.SpellCheckerService;
 import org.jboss.weld.environment.osgi.WeldContainerOwner;
-import org.jboss.weld.environment.se.WeldContainer;
+import org.jboss.weld.environment.osgi.WeldContainer;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 

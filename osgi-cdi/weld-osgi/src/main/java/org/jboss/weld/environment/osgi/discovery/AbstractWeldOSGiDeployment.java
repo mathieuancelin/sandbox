@@ -1,4 +1,4 @@
-package org.jboss.weld.environment.se.discovery;
+package org.jboss.weld.environment.osgi.discovery;
 
 import javax.enterprise.inject.spi.Extension;
 
@@ -18,13 +18,13 @@ import org.jboss.weld.bootstrap.spi.Metadata;
  * @author Pete Muir
  * 
  */
-public abstract class AbstractWeldSEDeployment implements Deployment {
+public abstract class AbstractWeldOSGiDeployment implements Deployment {
 
     public static final String[] RESOURCES = {"META-INF/beans.xml"};
     private final ServiceRegistry serviceRegistry;
     private final Iterable<Metadata<Extension>> extensions;
 
-    public AbstractWeldSEDeployment(Bootstrap bootstrap) {
+    public AbstractWeldOSGiDeployment(Bootstrap bootstrap) {
         this.serviceRegistry = new SimpleServiceRegistry();
         this.extensions = bootstrap.loadExtensions(getClass().getClassLoader());
     }

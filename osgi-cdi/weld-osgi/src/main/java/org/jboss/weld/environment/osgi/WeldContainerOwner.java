@@ -1,8 +1,6 @@
 package org.jboss.weld.environment.osgi;
 
-import org.jboss.weld.environment.se.Weld;
-import org.jboss.weld.environment.se.WeldContainer;
-import org.jboss.weld.environment.se.events.ContainerInitialized;
+import org.jboss.weld.environment.osgi.events.ContainerInitialized;
 import org.osgi.framework.BundleContext;
 
 /**

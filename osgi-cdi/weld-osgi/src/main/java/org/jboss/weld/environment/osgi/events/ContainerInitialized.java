@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.weld.environment.se.events;
+package org.jboss.weld.environment.osgi.events;
 
 /**
  * The event that is fired when the Weld CDI container is initialized and
@@ -23,6 +23,5 @@ package org.jboss.weld.environment.se.events;
  *
  * @author Peter Royle
  */
-public class ContainerShutdown {
-
+public class ContainerInitialized {
 }

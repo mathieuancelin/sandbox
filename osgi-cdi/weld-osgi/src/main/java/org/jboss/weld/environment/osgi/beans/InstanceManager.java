@@ -14,13 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.weld.environment.se.beans;
+package org.jboss.weld.environment.osgi.beans;
 
 import javax.enterprise.event.Event;
 import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 
-import org.jboss.weld.environment.se.WeldContainer;
+import org.jboss.weld.environment.osgi.WeldContainer;
 
 /**
  * A managed bean which holds all of the injected instances of managed beans and
@@ -30,23 +30,21 @@ import org.jboss.weld.environment.se.WeldContainer;
  * @see WeldContainer
  * @author Peter Royle
  */
-public class InstanceManager
-{
+public class InstanceManager {
 
-   @Inject Instance<Object> instances;
-   @Inject Event<Object> events;
+    @Inject
+    Instance<Object> instances;
+    @Inject
+    Event<Object> events;
 
-   public InstanceManager()
-   {
-   }
+    public InstanceManager() {
+    }
 
-   public Instance<Object> getInstances()
-   {
-      return instances;
-   }
+    public Instance<Object> getInstances() {
+        return instances;
+    }
 
-   public Event<Object> getEvents()
-   {
-      return events;
-   }
+    public Event<Object> getEvents() {
+        return events;
+    }
 }
