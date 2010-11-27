@@ -21,6 +21,7 @@ import javax.enterprise.inject.spi.AfterBeanDiscovery;
 import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.BeforeBeanDiscovery;
 import javax.enterprise.inject.spi.Extension;
+import org.jboss.weld.environment.osgi.WeldStartMessage;
 
 import org.jboss.weld.environment.se.beans.InstanceManager;
 import org.jboss.weld.environment.se.contexts.ThreadContext;
@@ -39,6 +40,7 @@ public class WeldSEBeanRegistrant implements Extension {
         event.addAnnotatedType(manager.createAnnotatedType(InstanceManager.class));
         event.addAnnotatedType(manager.createAnnotatedType(RunnableDecorator.class));
         event.addAnnotatedType(manager.createAnnotatedType(WeldContainer.class));
+        event.addAnnotatedType(manager.createAnnotatedType(WeldStartMessage.class));
     } // TODO : add @OSGiService Qualifier
 
     public void registerWeldSEContexts(@Observes AfterBeanDiscovery event) {

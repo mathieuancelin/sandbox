@@ -48,7 +48,8 @@ public class BundleScanner {
         this.context = context;
     }
 
-    public BeanDeploymentArchive scan() { // TODO : jars
+    public BeanDeploymentArchive scan() {
+        // TODO : jars
         // TODO : self bundle first, bean priority
         List<String> discoveredClasses = new ArrayList<String>();
         List<URL> discoveredBeanXmlUrls = new ArrayList<URL>();
@@ -69,7 +70,6 @@ public class BundleScanner {
                 }
             }
         }
-        discoveredClasses.add("org.jboss.weld.environment.osgi.ServiceImpl");
         // TODO : no more immutable. Scan new bundle deployed and add bindings
         return new ImmutableBeanDeploymentArchive("classpath",
                 discoveredClasses, bootstrap.parse(discoveredBeanXmlUrls));

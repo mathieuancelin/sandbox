@@ -16,6 +16,9 @@
           <include>com.sample.osgi:bundle-api</include>
           <include>com.sample.osgi:gui</include>
           <include>com.sample.osgi:weld-bundle</include>
+          <include>org.apache.felix:org.apache.felix.bundlerepository</include>
+          <include>org.apache.felix:org.apache.felix.shell.tui</include>
+          <include>org.apache.felix:org.apache.felix.shell</include>
         </includes>
     </dependencySet>
     <dependencySet>
