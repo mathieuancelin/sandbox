@@ -59,6 +59,7 @@
                             javax.enterprise.inject;
                             javax.inject;
                             org.jboss.weld.environment.osgi.events;
+                            org.jboss.weld.environment.osgi.integration;
                             org.jboss.weld.environment.osgi;
                         </Import-Package>
                         <Bundle-Activator>com.sample.osgi.cdi.activator.GuiActivator</Bundle-Activator>

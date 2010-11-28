@@ -2,7 +2,6 @@ package com.sample.osgi.cdi.activator;
 
 import com.sample.osgi.cdi.starter.Starter;
 import com.sample.osgi.cdi.gui.SpellCheckerGui;
-import com.sample.osgi.cdi.services.SpellCheckerService;
 import org.jboss.weld.environment.osgi.WeldContainerOwner;
 import org.jboss.weld.environment.osgi.WeldContainer;
 import org.osgi.framework.BundleActivator;
@@ -16,14 +15,12 @@ public class GuiActivator implements BundleActivator {
 
     private SpellCheckerGui gui;
     private WeldContainer weld;
-    private Starter starter;
 
     @Override
     public void start(BundleContext context) throws Exception {
         weld = WeldContainerOwner.container();
-        starter = weld.instance().select(Starter.class).get();
+        weld.instance().select(Starter.class).get();
         gui = weld.instance().select(SpellCheckerGui.class).get();
-        gui.setSpellService((SpellCheckerService) context.getService(context.getServiceReference(SpellCheckerService.class.getName())));
         gui.start();
     }
 

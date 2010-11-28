@@ -43,7 +43,7 @@ public class WeldActivator implements BundleActivator, BundleListener, ServiceLi
         // TODO : scan the bundle and add bindings
         // TODO : register services in the registry
         // TODO : start startable OSGiBeans
-        switch (event.getType()) {
+        /**switch (event.getType()) {
             case BundleEvent.INSTALLED:
                 System.out.print("Bundle INSTALLED => "); break;
             case BundleEvent.LAZY_ACTIVATION:
@@ -66,7 +66,7 @@ public class WeldActivator implements BundleActivator, BundleListener, ServiceLi
                 System.out.print("Bundle UPDATED => "); break;
             default: break;
         }
-        System.out.println(event.getBundle().getSymbolicName());
+        System.out.println(event.getBundle().getSymbolicName());**/
     }
 
     @Override

@@ -118,6 +118,7 @@
                              org.jboss.weld.bean.builtin;
                              org.jboss.weld.bean.proxy;
                              org.jboss.weld.environment.osgi;
+                             org.jboss.weld.environment.osgi.integration;
                              org.jboss.weld.environment.osgi.*;
                              org.jboss.weld.bootstrap;
                              org.jboss.weld.bootstrap.*;

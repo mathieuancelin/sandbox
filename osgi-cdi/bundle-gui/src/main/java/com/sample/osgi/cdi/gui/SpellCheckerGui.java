@@ -3,13 +3,16 @@ package com.sample.osgi.cdi.gui;
 import com.sample.osgi.cdi.services.SpellCheckerService;
 import com.sample.osgi.cdi.services.SpellCheckerSubstituteImpl;
 import com.sample.osgi.cdi.starter.PaymentService;
-import java.util.List;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import org.jboss.weld.environment.osgi.integration.OSGiService;
 
 /**
  *
@@ -23,7 +26,8 @@ public class SpellCheckerGui extends JFrame {
 
     private JLabel result = null;
 
-    private SpellCheckerService spellService;
+    @Inject @OSGiService
+    private Collection<SpellCheckerService> spellServices;
 
     @Inject
     private PaymentService payment;
@@ -35,16 +39,6 @@ public class SpellCheckerGui extends JFrame {
         super();
         initComponents();      
     }
-
-    public void setSpellService(SpellCheckerService spellService) {
-        this.spellService = spellService;
-    }
-
-
-    public SpellCheckerService getSpellService() {
-        return spellService;
-    }
-
     
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
@@ -94,7 +88,10 @@ public class SpellCheckerGui extends JFrame {
         String text = input.getText();
         if (text == null)
             text = "";
-        List<String> wrong = spellService.check(text);
+        Set<String> wrong = new HashSet<String>();
+        for (SpellCheckerService service : spellServices) {
+            wrong.addAll(service.check(text));
+        }
         if (wrong != null) {
             if (result != null) {
                 result.setText(wrong.size() + " word(s) are mispelled");

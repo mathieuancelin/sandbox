@@ -7,6 +7,7 @@ import javax.enterprise.inject.spi.BeforeBeanDiscovery;
 import javax.enterprise.inject.spi.Extension;
 
 import org.jboss.weld.environment.osgi.beans.InstanceManager;
+import org.jboss.weld.environment.osgi.integration.ServicesProducer;
 
 public class WeldOSGiExtension implements Extension {
 
@@ -15,6 +16,7 @@ public class WeldOSGiExtension implements Extension {
         event.addAnnotatedType(manager.createAnnotatedType(InstanceManager.class));
         event.addAnnotatedType(manager.createAnnotatedType(WeldContainer.class));
         event.addAnnotatedType(manager.createAnnotatedType(WeldStartMessage.class));
+        event.addAnnotatedType(manager.createAnnotatedType(ServicesProducer.class));
     } 
     // TODO : provide dynamic injection
     // TODO : provide service lookup
