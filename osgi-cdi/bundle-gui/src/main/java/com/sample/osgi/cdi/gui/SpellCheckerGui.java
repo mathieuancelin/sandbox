@@ -5,6 +5,7 @@ import com.sample.osgi.cdi.services.SpellCheckerSubstituteImpl;
 import com.sample.osgi.cdi.starter.PaymentService;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -90,7 +91,9 @@ public class SpellCheckerGui extends JFrame {
             text = "";
         Set<String> wrong = new HashSet<String>();
         for (SpellCheckerService service : spellServices) {
-            wrong.addAll(service.check(text));
+            List<String> wrongWords = service.check(text);
+            if (wrongWords != null)
+                wrong.addAll(wrongWords);
         }
         if (wrong != null) {
             if (result != null) {
