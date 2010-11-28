@@ -22,12 +22,12 @@ object Hello {
                     + count("Scala is so cool and very complicated!"))
 
             // conversation between 2 nodes
-            if (grid.nodes().size < 2) {
-                error("I need a partner to play a ping pong!")
-                return
-            } else {
-                pingPong
-            }
+            //if (grid.nodes().size < 2) {
+            //    error("I need a partner to play a ping pong!")
+            //    return
+            //} else {
+            //    pingPong
+            //}
         }
     }
 
