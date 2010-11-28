@@ -22,12 +22,12 @@ object Hello {
                     + count("Scala is so cool and very complicated!"))
 
             // conversation between 2 nodes
-            if (grid.nodes().size < 2) {
-                error("I need a partner to play a ping pong!")
-                return
-            } else {
-                pingPong
-            }
+            //if (grid.nodes().size < 2) {
+            //    error("I need a partner to play a ping pong!")
+            //    return
+            //} else {
+            //    pingPong
+            //}
         }
     }
 
@@ -39,7 +39,7 @@ object Hello {
             println("calculating for: " + w)
             w.length
         },
-        (s: Seq[Int]) => (0 /: s)(_ + _))
+        (s: Seq[Int]) => s.reduceLeft(_ + _))
 
     /**
      * Messages between 2 nodes    .
