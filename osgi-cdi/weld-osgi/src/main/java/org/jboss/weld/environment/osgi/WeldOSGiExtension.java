@@ -52,6 +52,7 @@ public class WeldOSGiExtension implements Extension {
         event.addAnnotatedType(manager.createAnnotatedType(WeldStartMessage.class));
         event.addAnnotatedType(manager.createAnnotatedType(ServicesProducer.class));
         event.addAnnotatedType(manager.createAnnotatedType(Services.class));
+        event.addQualifier(OSGiService.class);
     }
     // TODO : add registrable services
     // TODO : add startable components (@OSGiBean) with lifecycle to be started at bundle install
