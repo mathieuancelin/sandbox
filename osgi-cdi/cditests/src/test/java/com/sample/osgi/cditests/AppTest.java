@@ -11,6 +11,8 @@ public class AppTest {
 
     @Test
     public void testCollection() {
+        Services<Starter> s = new Services<Starter>();
+        s.getClassType();
         WeldContainer container = new Weld().initialize();
         Starter starter = container.instance().select(Starter.class).get();
         starter.execute();

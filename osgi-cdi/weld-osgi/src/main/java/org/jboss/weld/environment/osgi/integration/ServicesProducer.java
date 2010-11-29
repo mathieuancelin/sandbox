@@ -1,40 +1,46 @@
 package org.jboss.weld.environment.osgi.integration;
 
 import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Proxy;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
 import org.osgi.framework.Bundle;
+import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
-import org.osgi.framework.ServiceReference;
 
 /**
+ * Producers for Specific injected types;
  *
  * @author mathieu
  */
 public class ServicesProducer {
 
-    @Produces @OSGiService
-    public <T> Collection<T> OSGiServices(InjectionPoint p) throws Exception {
+    @Produces
+    public Bundle getBundle(InjectionPoint p) {
         Bundle bundle = FrameworkUtil.getBundle(p.getMember().getDeclaringClass());
-        Class serviceClass = ((Class)((ParameterizedType)p.getType()).getActualTypeArguments()[0]);
-        String serviceName = serviceClass.getName();
-        List result = new ArrayList();
-        ServiceReference[] refs = bundle.getBundleContext().getServiceReferences(serviceName, null);
-        for (ServiceReference ref : refs) {
-            if (!serviceClass.isInterface()) {
-                result.add(bundle.getBundleContext().getService(ref));
-            } else { // Totally dumb, dynamic is for single injection point
-                // TODO : here provide a dynamic collection and not a collection of dynamic services
-                result.add(Proxy.newProxyInstance(
-                            getClass().getClassLoader(),
-                            new Class[]{(Class) serviceClass},
-                            new DynamicServiceHandler(bundle, serviceName)));
-            }
-        }
-        return result;
+        if (bundle != null)
+            return bundle;
+        else
+            throw new IllegalStateException("Can't find bundle.");
+    }
+
+    @Produces
+    public BundleContext getBundleContext(InjectionPoint p) {
+        Bundle bundle = FrameworkUtil.getBundle(p.getMember().getDeclaringClass());
+        if (bundle != null)
+            return bundle.getBundleContext();
+        else
+            throw new IllegalStateException("Can't find bundle.");
+    }
+
+    @Produces
+    public <T> Services<T> getOSGiServices(InjectionPoint p) {
+        return new Services<T>(((ParameterizedType)p.getType()).getActualTypeArguments()[0],
+                p.getMember().getDeclaringClass());
+    }
+
+    @Produces
+    public <T> Service<T> getOSGiService(InjectionPoint p) {
+        return new Service<T>(((ParameterizedType)p.getType()).getActualTypeArguments()[0],
+                p.getMember().getDeclaringClass());
     }
 }
