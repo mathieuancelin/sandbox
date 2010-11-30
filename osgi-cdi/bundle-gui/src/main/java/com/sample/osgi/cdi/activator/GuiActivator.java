@@ -13,15 +13,13 @@ import org.osgi.framework.BundleContext;
  */
 public class GuiActivator implements BundleActivator {
 
-    private SpellCheckerGui gui;
     private WeldContainer weld;
 
     @Override
     public void start(BundleContext context) throws Exception {
         weld = WeldContainerOwner.container();
         weld.instance().select(Starter.class).get();
-        gui = weld.instance().select(SpellCheckerGui.class).get();
-        gui.start();
+        weld.instance().select(SpellCheckerGui.class).get();
     }
 
     @Override

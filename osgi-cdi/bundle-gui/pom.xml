@@ -43,22 +43,20 @@
                              com.sample.osgi.cdi.activator;
                              com.sample.osgi.cdi.gui;
                              com.sample.osgi.cdi.starter;
-                             javax.annotation;
                         </_exportcontents>
                         <Export-Package>
                             com.sample.osgi.cdi.activator;
                             com.sample.osgi.cdi.gui;
                             com.sample.osgi.cdi.starter;
-                            javax.annotation;
                         </Export-Package>
                         <Import-Package>
                             com.sample.osgi.cdi.services;
-                            org.osgi.framework; javax.swing;
+                            org.osgi.framework; 
+                            javax.swing;
                             javax.annotation;
-                            javax.enterprise.event;
                             javax.enterprise.inject;
+                            javax.enterprise.event;
                             javax.inject;
-                            org.jboss.weld.environment.osgi.events;
                             org.jboss.weld.environment.osgi.integration;
                             org.jboss.weld.environment.osgi;
                         </Import-Package>

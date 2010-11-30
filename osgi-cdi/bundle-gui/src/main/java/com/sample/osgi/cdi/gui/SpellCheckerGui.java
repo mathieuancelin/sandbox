@@ -8,7 +8,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.enterprise.event.Observes;
 import javax.inject.Inject;
+import javax.inject.Singleton;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -16,34 +19,35 @@ import javax.swing.JTextField;
 import org.jboss.weld.environment.osgi.integration.OSGiService;
 import org.jboss.weld.environment.osgi.integration.Service;
 import org.jboss.weld.environment.osgi.integration.Services;
+import org.osgi.framework.BundleEvent;
 
 /**
+ * 
  *
  * @author Mathieu ANCELIN
  */
+@Singleton
 public class SpellCheckerGui extends JFrame {
 
     private JTextField input = null;
-
     private JButton checkButton = null;
     private JButton checkButton2 = null;
-
     private JLabel result = null;
 
     @Inject
-    private Services<SpellCheckerService> services;
+    private Services<SpellCheckerService> spellCheckerServices;
 
     @Inject
-    private Service<SpellCheckerService> service;
+    private Service<SpellCheckerService> spellCheckerService;
 
     @Inject @OSGiService
-    private DictionaryService osgiService;
+    private DictionaryService dictionaryService;
 
     @Inject
-    private PaymentService payment;
+    private PaymentService paymentService;
 
     @Inject
-    private SpellCheckerSubstituteImpl subst;
+    private SpellCheckerSubstituteImpl otherSpellService;
 
     public SpellCheckerGui() {
         super();
@@ -66,8 +70,8 @@ public class SpellCheckerGui extends JFrame {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
                 check();
-                payment.pay(4321);
-                subst.sayHello();
+                paymentService.pay(4321);
+                otherSpellService.sayHello();
             }
         });
 
@@ -86,15 +90,15 @@ public class SpellCheckerGui extends JFrame {
         getContentPane().add(checkButton, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         getContentPane().add(checkButton2, gridBagConstraints);
 
         result.setPreferredSize(new java.awt.Dimension(175, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         getContentPane().add(result, gridBagConstraints);
@@ -115,8 +119,8 @@ public class SpellCheckerGui extends JFrame {
         if (text == null)
             text = "";
         Set<String> wrong = new HashSet<String>();
-        for (SpellCheckerService service : services) {
-            List<String> wrongWords = service.check(text);
+        for (SpellCheckerService spellServ : spellCheckerServices) {
+            List<String> wrongWords = spellServ.check(text);
             if (wrongWords != null)
                 wrong.addAll(wrongWords);
         }
@@ -130,16 +134,20 @@ public class SpellCheckerGui extends JFrame {
     }
 
     private void check2() {
-        service.get().check("troulala");
-        System.out.println(osgiService.checkWord("Mojito"));
+        spellCheckerService.get().check("troulala");
+        System.out.println(dictionaryService.checkWord("Mojito"));
     }
 
     @PostConstruct
     public void start() {
+        System.out.println("Displaying view ...");
         this.setVisible(true);
     }
 
+    @PreDestroy
     public void stop() {
+        System.out.println("Undisplaying view ...");
+        this.setVisible(false);
         this.dispose();
     }
 }

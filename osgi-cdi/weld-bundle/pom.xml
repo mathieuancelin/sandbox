@@ -110,6 +110,7 @@
                         <_exportcontents>
                              javax.inject;
                              javax.decorator;
+                             javax.annotation;
                              javax.enterprise.*;
                              version=1.0,
                              org.jboss.weld.context;

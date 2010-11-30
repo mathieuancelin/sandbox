@@ -15,24 +15,6 @@ import org.osgi.framework.FrameworkUtil;
 public class ServicesProducer {
 
     @Produces
-    public Bundle getBundle(InjectionPoint p) {
-        Bundle bundle = FrameworkUtil.getBundle(p.getMember().getDeclaringClass());
-        if (bundle != null)
-            return bundle;
-        else
-            throw new IllegalStateException("Can't find bundle.");
-    }
-
-    @Produces
-    public BundleContext getBundleContext(InjectionPoint p) {
-        Bundle bundle = FrameworkUtil.getBundle(p.getMember().getDeclaringClass());
-        if (bundle != null)
-            return bundle.getBundleContext();
-        else
-            throw new IllegalStateException("Can't find bundle.");
-    }
-
-    @Produces
     public <T> Services<T> getOSGiServices(InjectionPoint p) {
         return new Services<T>(((ParameterizedType)p.getType()).getActualTypeArguments()[0],
                 p.getMember().getDeclaringClass());
