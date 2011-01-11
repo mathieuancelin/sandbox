@@ -6,9 +6,9 @@ import cx.ath.mancel01.webframework.data.JPAService;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.persistence.EntityManager;
@@ -24,18 +24,25 @@ public class Users {
 
     private final ConcurrentMap<String, User>  users;
 
-    private static final ScheduledExecutorService exec = Executors.newScheduledThreadPool(1);
+    //private static final ScheduledExecutorService exec = Executors.newScheduledThreadPool(1);
+    private static final ExecutorService exec = Executors.newFixedThreadPool(1);
+
+    private AtomicBoolean batchRunning = new AtomicBoolean(false);
 
     @Inject
     public Users(CacheService cache) {
         this.cache = cache;
         this.users = Maps.newConcurrentMap();
-        exec.scheduleAtFixedRate(new JPABatch(users), 0, 2, TimeUnit.SECONDS);
+        //exec.scheduleAtFixedRate(new JPABatch(users), 0, 1, TimeUnit.SECONDS);
     }
 
     public boolean add(User u) {
         if (null == cache.get(u.getMail())) {
             cache.add(u.getMail(), u, 3600);
+            if (!batchRunning.get()) {
+                batchRunning.getAndSet(true);
+                exec.submit(new JPABatch(users));
+            }
             return null == users.putIfAbsent(u.getMail(), u);
         }
         return false;
@@ -53,19 +60,23 @@ public class Users {
         @Override
         public void run() {
             if (users.isEmpty()) {
+                batchRunning.getAndSet(false);
                 return;
             }
-            JPAService.getInstance().startTx();
-            EntityManager em = JPAService.currentEm.get();
-            Set<Entry<String, User>> entries = users.entrySet();
-            int i = 0;
-            for (Entry<String, User> entry : entries) {
-                i++;
-                em.persist(entry.getValue());
-                users.remove(entry.getKey());
-                if (i == 500) break;
+            while(!users.isEmpty()) {
+                JPAService.getInstance().startTx();
+                EntityManager em = JPAService.currentEm.get();
+                Set<Entry<String, User>> entries = users.entrySet();
+                int i = 0;
+                for (Entry<String, User> entry : entries) {
+                    i++;
+                    em.persist(entry.getValue());
+                    users.remove(entry.getKey());
+                    if (i == 500) break;
+                }
+                JPAService.getInstance().stopTx(false);
             }
-            JPAService.getInstance().stopTx(false);
+            batchRunning.getAndSet(false);
         }
     }
 }
