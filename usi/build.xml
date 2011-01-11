@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="USI App" default="build" basedir=".">
+
+    <property environment="env"/>
+
+    <path id="project.classpath">
+        <fileset dir="/home/mathieu/workspace/perso/web-framework/distrib/target/web-framework-all.dir/web-framework/lib">
+            <include name="*.jar"/>                        
+        </fileset>
+        <fileset dir="lib">
+            <include name="**/*.jar"/>
+        </fileset>
+        <fileset dir="src/main/resources">
+            <include name="**/*"/>
+        </fileset>
+        <fileset dir="src/main/webapp/conf">
+            <include name="**/*"/>
+        </fileset>
+    </path>
+
+    <target name="clean" description="clean resources">
+        <delete dir="target" />
+        <mkdir dir="target"/>
+    </target>
+    
+    <target name="compile" depends="clean">
+        <mkdir dir="target/classes"/>
+        <javac encoding="utf-8" srcdir="src/main/java"
+                destdir="target/classes" debug="true"
+                includeantruntime="true" source="1.6" target="1.6">
+            <classpath refid="project.classpath" />
+        </javac>
+    </target>
+    
+    <!-- Launch all *Test.java -->
+    
+    <target name="test" depends="compile" description="run tests suite">
+        <echo message="running tests ...." />
+        <antcall target="run-tests"/>
+        <echo message="*****************" />
+        <echo message="All test passed !" />
+        <echo message="*****************" />  
+    </target>
+
+    <target name="compile-tests" depends="compile">
+        <mkdir dir="target/test-classes"/>
+        <javac encoding="utf-8" nowarn="${compile.nowarn}"
+                debug="true" destdir="target/test-classes"
+                classpathref="project.classpath" srcdir="src/test/java" >
+            <include name="**/*.java"/>
+        </javac>
+    </target>
+
+    <target name="run-tests" depends="compile-tests">
+        <mkdir dir="target/tests-results" />
+        <mkdir dir="target/tests-tmp" />
+        <junit errorproperty="tests.failed" 
+            failureproperty="tests.failed" fork="true"
+            showoutput="true" tempdir="target/tests-tmp" >
+            <test name="${testclass}" todir="tests-results" />            
+            <classpath>
+                <pathelement path="target/test-classes"/>
+                <path refid="project.classpath"/>                
+            </classpath>                   
+            <formatter type="brief" usefile="false"/> 
+            <formatter type="xml"/>
+        </junit>
+        <delete dir="target/tests-tmp" />
+    </target>
+
+    <target name="war" depends="compile">
+        <war destfile="target/app.war" webxml="src/main/webapp/WEB-INF/web.xml">
+          <lib dir="${env.WEBFWK_HOME}/lib">
+            <include name="*.jar"/>                        
+          </lib>
+          <lib dir="lib">
+            <include name="**/*.jar"/>
+          </lib>
+          <classes dir="target/classes"/>
+          <zipfileset dir="src/main"
+                      prefix="src/main">
+               <exclude name="**/WEB-INF/**/*"/>
+          </zipfileset>
+        </war>
+    </target>
+    
+</project>

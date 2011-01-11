@@ -1,0 +1,27 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+
+<h2 class="title"><a href="#">Users</a></h2>
+<div class="entry">
+    number of registered users : <br/><b><div id="nbr"></div></b>
+    
+</div>
+<script type="text/javascript">
+    init();
+    function init() {
+	return setInterval(update, 10000);
+    }
+    function update() {
+        $.ajax({
+            url: "/count",
+            type: "GET",
+            success: function(html){
+                $('#nbr').html(html);
+            },
+            error: function(html){
+                $('#nbr').html('error');
+            }
+        });
+    }
+</script>
+<div class="byline" />
