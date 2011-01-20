@@ -1,0 +1,220 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Umbrella slideshow :)</title>
+    <style>
+
+	.slide-images {
+	  position: relative;
+	  list-style: none;
+	  padding: 0;
+	  overflow: hidden;
+	}
+	.slide-images .slide-image {
+	  position: absolute;
+	}
+	.slide-images .slide-image.current img {
+	  z-index: 12;
+	}
+	.slide-images .slide-image.current span {
+	  z-index: 13;
+	}
+	.slide-images .slide-image img {
+	  z-index: 2;
+	}
+	.slide-images .slide-image span {
+	  position: absolute;
+	  right: 0;
+	  bottom: 4px;
+	  padding: 5px 10px;
+	  color: rgba(255,255,255,0.8);
+	  font-weight: bold;
+	  font-size: 14px;
+	  background-color: rgba(0,0,0,0.3);
+	  -moz-border-radius: 5px 0 0 0;
+	  -webkit-border-radius: 5px 0 0 0;
+	  z-index: 3;
+	}
+
+	#container .options {
+	  padding: 3px 10px;
+	  text-align: center;
+	  min-height: 15px;
+	}
+	
+	#container .options a {
+	  text-decoration: none;
+	  font-weight: bold;
+	  font-size: 12px;
+	  font-family: Georgia,Serif;
+	  color: #91BECC;
+	}
+	
+	#container .options a:hover {
+	  color: #D3E5EB;
+	}
+	
+	#container .slide-pager a {
+	  -moz-transition-duration: 0.5s;
+	  -webkit-transition-duration: 0.5s;
+	}
+	
+	#container .slide-pager a.current {
+	  background-color: #91BECC;
+	  color: black;
+	  padding: 0 4px;
+	  -moz-border-radius: 5px;
+	  -webkit-border-radius: 5px;
+	}
+	
+	#container .options .prevSlide {
+	  float: left;
+	}
+	
+	#container .options .nextSlide {
+	  float: right;
+	}
+	
+	#container {
+	  margin: 5px auto;
+	  padding: 0;
+	  background: black;
+	  overflow: auto;
+	  -moz-box-shadow: 1px 1px 5px black;
+	  -webkit-box-shadow: 1px 1px 5px black;
+	  width: 560px;
+	}
+	
+	#slider {
+	  margin: 0 auto;
+	  padding: 0;
+	  border: 5px solid black;
+	  border-bottom: 0;
+	  height: 220px;
+	  width: 550px;
+	}
+      
+ /** 
+  * ici c'est vraiment pour le slideshow 
+  * les attributs vont par deux car CSS3 n'étant pas encore normalisé, chaque moteur de rendu utilise un préfix
+  **/
+
+      /** durée de transition **/
+      .slide-images .slide-image, 
+      .slide-images .slide-image img {
+        	-mozilla-transition-duration: 1.5s;
+        	-webkit-transition-duration: 1.5s;
+      }
+      
+	  /** disparition pour les autres **/
+      .slide-images.transition .slide-image img {
+			-mozilla-transform:  scale(2);
+			-webkit-transform:  scale(2);
+			
+			/**-moz-transform:  scale(2) rotate(180deg);
+			-webkit-transform:  scale(2) rotate(180deg);**/
+			
+			/**-moz-transform:  scale(2) translate(-550px, 0px);
+			-webkit-transform:  scale(2) translate(-550px, 0px);**/
+			
+			/**-moz-transform:  matrix(-1, 0, 0, 1, 0, 250px);
+			-webkit-transform:  matrix(-1, 0, 0, 1, 0, 250px);**/
+			
+			/**-moz-transform:  matrix(1, 3, 0, 1, 0, 0);
+			-webkit-transform:  matrix(1, 3, 0, 1, 0, 0);**/
+      }
+
+      /** apparition pour l'image courante **/
+      .slide-images.transition .slide-image.current img {
+			
+			-moz-transform: scale(1);
+			-webkit-transform: scale(1);
+			
+			/**-moz-transform: scale(1) rotate(0);
+			-webkit-transform: scale(1) rotate(0);**/
+			
+			/**-moz-transform: scale(1) translate(0, 0);
+			-webkit-transform: scale(1) translate(0, 0);**/
+			
+			/**-moz-transform: matrix(1, 0, 0, 1, 0, 0);
+			-webkit-transform: matrix(1, 0, 0, 1, 0, 0);**/
+			
+			/**-moz-transform: matrix(1, 0, 0, 1, 0, 0);
+			-webkit-transform: matrix(1, 0, 0, 1, 0, 0);**/
+      }
+
+	  /** toutes les images sont transparentes **/
+	  .slide-images.transition .slide-image {
+        	opacity: 0;
+	  }
+	
+	  /** sauf la courante **/
+      .slide-images.transition .slide-image.current {
+	    	opacity: 1;
+      }
+
+    </style>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+  </head>
+
+  <body>
+    <div id="container">
+      <ul id="slider" class="slide-images transition">
+        <li class="slide-image">
+          <img src="parapluie1.jpg" />
+          <span>parapluie1</span>
+        </li>
+        <li class="slide-image">
+          <img src="parapluie2.jpg" />
+          <span>parapluie2</span>
+        </li>
+      </ul>
+      <div class="options">
+        <a href="javascript:;" class="prevSlide">prev</a>
+        <a href="javascript:;" class="nextSlide">next</a>
+      </div>
+    </div>
+    
+    <script type="text/javascript">
+      $(function(){
+        var TIMEOUT_SLIDE = 4000;
+        $('.slide-images').each(function() {
+          var slider = $(this);
+          var slides = $('.slide-image', slider);
+          var currentSlideNum = 0;
+          slides.removeClass('current');
+          slides.eq(currentSlideNum).addClass('current');
+          var goToSlide = function(slideNum) {
+            slides.eq(currentSlideNum).removeClass('current');
+            slides.eq(slideNum).addClass('current');
+            currentSlideNum = slideNum;
+          };
+          var nextSlide = function() {
+            var nextSlideNum = currentSlideNum + 1;
+            if(nextSlideNum>=slides.size())
+              nextSlideNum = 0;
+            goToSlide(nextSlideNum);
+          };
+          var prevSlide = function() {
+            var prevSlideNum = currentSlideNum - 1;
+            if(prevSlideNum<0)
+              prevSlideNum = slides.size()-1;
+            goToSlide(prevSlideNum);
+          };
+          $('.prevSlide').click(prevSlide);
+          $('.nextSlide').click(nextSlide);
+          var lastHumanNav = 0;
+          $('.prevSlide, .nextSlide, .slide-pager a').click(function(){
+            lastHumanNav = new Date().getTime();
+          });
+          setInterval(function() {
+            var now = new Date().getTime();
+            if(now - lastHumanNav > TIMEOUT_SLIDE)
+              nextSlide();
+          }, TIMEOUT_SLIDE);
+        });
+      });
+    </script>
+  </body>
+</html>
+
