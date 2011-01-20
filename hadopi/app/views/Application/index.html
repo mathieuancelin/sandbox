@@ -1,0 +1,33 @@
+#{extends 'main.html' /}
+#{set title:'Temoignages HADOPI' /}
+
+<table>
+    <thead>
+        <tr>
+             <th>id</th>
+             <th>FAI</th>
+             <th>Date courrier</th>
+             <th>Date collecte</th>
+             <th>Type de courrier</th>
+             <th>codePostal</th>
+             <th>Musiques</th>
+             <th>Films</th>
+             <th>Jeux</th>
+        </tr>
+    </thead>
+    <tbody>
+        #{list temoignages, as:'temoignage'}
+        <tr>
+            <td>${temoignage?.id}</td>
+            <td>${temoignage?.fai}</td>
+            <td>${temoignage?.dateCourrier}</td>
+            <td>${temoignage?.collecteIP}</td>
+            <td>${temoignage?.typeCourrier}</td>
+            <td>${temoignage?.codePostal}</td>
+            <td>${temoignage?.nbrMusiques}</td>
+            <td>${temoignage?.nbrFilms}</td>
+            <td>${temoignage?.nbrJeux}</td>
+        </tr>
+        #{/list}
+    </tbody>
+</table>

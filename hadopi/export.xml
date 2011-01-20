@@ -1,0 +1,883 @@
+<?xml version="1.0"  encoding="UTF-8" ?>
+<temoignages>
+		<temoignage>
+		<id>10</id>
+		<date_courrier>Mon Oct  4 00:00:00 2010</date_courrier>
+		<type_courrier>lettre</type_courrier>
+		<fai>free</fai>
+		<date_collecteIP>Tue Jun  1 00:00:00 2010</date_collecteIP>
+		<musique>1</musique>
+		<film>0</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>1000</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>11</id>
+		<date_courrier>Mon Oct  4 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>neuf</fai>
+		<date_collecteIP>Fri Jul 16 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>1</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>37000</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>12</id>
+		<date_courrier>Mon Oct  4 00:00:00 2010</date_courrier>
+		<type_courrier>lettre</type_courrier>
+		<fai>orange</fai>
+		<date_collecteIP>Fri Sep 17 00:00:00 2010</date_collecteIP>
+		<musique>1</musique>
+		<film>0</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>35000</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>14</id>
+		<date_courrier>Tue Oct  5 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>orange</fai>
+		<date_collecteIP>Fri Oct  1 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>0</film>
+		<jeuxvideo>1</jeuxvideo>
+		<codepostal>75000</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>15</id>
+		<date_courrier>Tue Oct  5 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>free</fai>
+		<date_collecteIP>Mon Oct  4 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>1</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>75004</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>16</id>
+		<date_courrier>Wed Oct  6 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>orange</fai>
+		<date_collecteIP>Tue Oct  5 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>1</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>45009</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>18</id>
+		<date_courrier>Wed Oct  6 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>free</fai>
+		<date_collecteIP>Sat Oct  2 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>1</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>75005</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>19</id>
+		<date_courrier>Wed Oct  6 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>free</fai>
+		<date_collecteIP>Sat Oct  2 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>1</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>12345</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>22</id>
+		<date_courrier>Fri Dec 24 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>autre</fai>
+		<date_collecteIP>Tue Jun  7 00:00:00 2011</date_collecteIP>
+		<musique>0</musique>
+		<film>1</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>75012</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>21</id>
+		<date_courrier>Wed Oct  6 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>orange</fai>
+		<date_collecteIP>Thu Jul  8 00:00:00 2010</date_collecteIP>
+		<musique>1</musique>
+		<film>0</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>75010</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>23</id>
+		<date_courrier>Thu Oct  7 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>neuf</fai>
+		<date_collecteIP>Tue Oct  5 00:00:00 2010</date_collecteIP>
+		<musique>1</musique>
+		<film>0</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>59200</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>24</id>
+		<date_courrier>Wed Oct  6 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>neuf</fai>
+		<date_collecteIP>Thu Sep  9 00:00:00 2010</date_collecteIP>
+		<musique>1</musique>
+		<film>0</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>13000</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>100</id>
+		<date_courrier>Fri Dec 24 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>orange</fai>
+		<date_collecteIP>Mon Dec 13 00:00:00 2010</date_collecteIP>
+		<musique>1</musique>
+		<film>1</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>78800</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>26</id>
+		<date_courrier>Tue Oct 12 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>neuf</fai>
+		<date_collecteIP>Tue Sep 21 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>0</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>66000</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>27</id>
+		<date_courrier>Wed Oct 13 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>free</fai>
+		<date_collecteIP>Fri Oct  8 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>1</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>75010</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>30</id>
+		<date_courrier>Sat Oct 16 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>darty</fai>
+		<date_collecteIP>Wed Sep  8 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>1</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>65010</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>31</id>
+		<date_courrier>Mon Oct 18 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>free</fai>
+		<date_collecteIP>Wed Oct  6 00:00:00 2010</date_collecteIP>
+		<musique>1</musique>
+		<film>0</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>75016</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>32</id>
+		<date_courrier>Mon Oct 18 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>free</fai>
+		<date_collecteIP>Wed Sep 22 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>1</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>79180</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>33</id>
+		<date_courrier>Thu Oct 21 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>free</fai>
+		<date_collecteIP>Tue Oct 12 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>1</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>31100</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>34</id>
+		<date_courrier>Fri Oct 22 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>orange</fai>
+		<date_collecteIP>Tue Oct  5 00:00:00 2010</date_collecteIP>
+		<musique>1</musique>
+		<film>0</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>82000</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>35</id>
+		<date_courrier>Mon Oct 18 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>free</fai>
+		<date_collecteIP>Mon Sep  6 00:00:00 2010</date_collecteIP>
+		<musique>1</musique>
+		<film>0</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>26200</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>36</id>
+		<date_courrier>Fri Oct 29 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>free</fai>
+		<date_collecteIP>Mon Oct  4 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>1</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>75014</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>37</id>
+		<date_courrier>Thu Nov  4 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>free</fai>
+		<date_collecteIP>Tue Oct 12 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>0</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>33700</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>38</id>
+		<date_courrier>Thu Nov  4 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>orange</fai>
+		<date_collecteIP>Sun Oct 17 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>1</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>63122</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>39</id>
+		<date_courrier>Thu Nov  4 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>free</fai>
+		<date_collecteIP>Sat Oct 16 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>0</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>75079</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>40</id>
+		<date_courrier>Tue Nov  2 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>orange</fai>
+		<date_collecteIP>Fri Sep  3 00:00:00 2010</date_collecteIP>
+		<musique>1</musique>
+		<film>0</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>68130</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>41</id>
+		<date_courrier>Tue Nov  9 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>numericable</fai>
+		<date_collecteIP>Fri Oct 29 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>1</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>75013</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>42</id>
+		<date_courrier>Wed Nov  3 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>free</fai>
+		<date_collecteIP>Mon Oct  4 00:00:00 2010</date_collecteIP>
+		<musique>1</musique>
+		<film>0</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>13700</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>43</id>
+		<date_courrier>Tue Nov 16 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>neuf</fai>
+		<date_collecteIP>Wed Nov  3 00:00:00 2010</date_collecteIP>
+		<musique>1</musique>
+		<film>0</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>69007</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>44</id>
+		<date_courrier>Wed Nov  3 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>free</fai>
+		<date_collecteIP>Sun Oct 17 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>1</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>11270</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>99</id>
+		<date_courrier>Thu Dec 23 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>orange</fai>
+		<date_collecteIP>Wed Dec  8 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>1</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>97410</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>46</id>
+		<date_courrier>Fri Nov  5 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>orange</fai>
+		<date_collecteIP>Sun Oct 24 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>0</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>35120</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>47</id>
+		<date_courrier>Fri Nov 19 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>free</fai>
+		<date_collecteIP>Sat Nov  6 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>1</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>44000</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>98</id>
+		<date_courrier>Wed Jan  5 00:00:00 2011</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>free</fai>
+		<date_collecteIP>Wed Dec  8 00:00:00 2010</date_collecteIP>
+		<musique>1</musique>
+		<film>1</film>
+		<jeuxvideo>1</jeuxvideo>
+		<codepostal>69007</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>49</id>
+		<date_courrier>Mon Nov 29 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>free</fai>
+		<date_collecteIP>Mon Nov 15 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>0</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>57440</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>50</id>
+		<date_courrier>Mon Nov 29 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>free</fai>
+		<date_collecteIP>Wed Nov 10 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>0</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>29100</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>51</id>
+		<date_courrier>Tue Nov 16 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>neuf</fai>
+		<date_collecteIP>Wed Nov  3 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>0</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>57600</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>52</id>
+		<date_courrier>Fri Nov 26 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>bouygues</fai>
+		<date_collecteIP>Sun Nov 14 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>1</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>65000</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>53</id>
+		<date_courrier>Tue Nov 30 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>neuf</fai>
+		<date_collecteIP>Mon Nov 15 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>0</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>4170</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>54</id>
+		<date_courrier>Thu Dec  2 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>free</fai>
+		<date_collecteIP>Thu Nov 18 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>0</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>13006</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>55</id>
+		<date_courrier>Thu Dec  2 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>free</fai>
+		<date_collecteIP>Sat Nov 20 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>0</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>27000</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>56</id>
+		<date_courrier>Thu Dec 30 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>neuf</fai>
+		<date_collecteIP>Fri Dec 10 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>0</film>
+		<jeuxvideo>1</jeuxvideo>
+		<codepostal>68190</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>57</id>
+		<date_courrier>Thu Dec  2 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>free</fai>
+		<date_collecteIP>Sat Nov 20 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>1</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>75018</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>58</id>
+		<date_courrier>Thu Dec  2 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>free</fai>
+		<date_collecteIP>Mon Nov 15 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>0</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>6270</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>59</id>
+		<date_courrier>Fri Nov 19 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>orange</fai>
+		<date_collecteIP>Sat Nov  6 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>0</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>85600</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>97</id>
+		<date_courrier>Tue Dec 28 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>free</fai>
+		<date_collecteIP>Thu Dec 16 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>1</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>75003</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>61</id>
+		<date_courrier>Wed Dec 15 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>free</fai>
+		<date_collecteIP>Thu Nov 25 00:00:00 2010</date_collecteIP>
+		<musique>1</musique>
+		<film>0</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>13006</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>62</id>
+		<date_courrier>Wed Dec 15 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>free</fai>
+		<date_collecteIP>Sat Nov 13 00:00:00 2010</date_collecteIP>
+		<musique>1</musique>
+		<film>0</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>91290</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>63</id>
+		<date_courrier>Tue Dec 14 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>orange</fai>
+		<date_collecteIP>Thu Nov 18 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>1</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>92370</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>64</id>
+		<date_courrier>Wed Dec 15 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>autre</fai>
+		<date_collecteIP>Fri Nov 26 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>1</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>71400</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>65</id>
+		<date_courrier>Tue Dec 14 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>free</fai>
+		<date_collecteIP>Thu Oct 14 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>0</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>31620</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>66</id>
+		<date_courrier>Tue Dec 21 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>free</fai>
+		<date_collecteIP>Sun Dec 12 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>1</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>13127</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>67</id>
+		<date_courrier>Fri Dec 10 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>numericable</fai>
+		<date_collecteIP>Wed Nov 17 00:00:00 2010</date_collecteIP>
+		<musique>1</musique>
+		<film>0</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>75012</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>68</id>
+		<date_courrier>Thu Dec 23 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>free</fai>
+		<date_collecteIP>Mon Dec 13 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>0</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>75003</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>69</id>
+		<date_courrier>Fri Dec 24 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>orange</fai>
+		<date_collecteIP>Mon Dec 13 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>0</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>33000</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>70</id>
+		<date_courrier>Thu Dec 16 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>orange</fai>
+		<date_collecteIP>Wed Nov 24 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>0</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>57000</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>71</id>
+		<date_courrier>Fri Dec 24 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>neuf</fai>
+		<date_collecteIP>Sat Dec 11 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>1</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>57500</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>72</id>
+		<date_courrier>Thu Dec 23 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>orange</fai>
+		<date_collecteIP>Wed Dec  8 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>0</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>2300</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>73</id>
+		<date_courrier>Tue Dec 21 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>orange</fai>
+		<date_collecteIP>Sun Dec  5 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>1</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>61150</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>96</id>
+		<date_courrier>Wed Dec 22 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>neuf</fai>
+		<date_collecteIP>Sat Dec  4 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>1</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>33000</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>75</id>
+		<date_courrier>Tue Dec 21 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>free</fai>
+		<date_collecteIP>Thu Dec  9 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>1</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>94300</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>76</id>
+		<date_courrier>Fri Dec 24 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>free</fai>
+		<date_collecteIP>Tue Dec  7 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>1</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>21000</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>77</id>
+		<date_courrier>Wed Dec 15 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>neuf</fai>
+		<date_collecteIP>Wed Dec  1 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>1</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>44</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>78</id>
+		<date_courrier>Tue Dec 21 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>free</fai>
+		<date_collecteIP>Sat Dec 11 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>1</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>54000</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>79</id>
+		<date_courrier>Tue Dec 14 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>free</fai>
+		<date_collecteIP>Wed Dec  1 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>0</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>33000</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>80</id>
+		<date_courrier>Thu Dec  2 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>orange</fai>
+		<date_collecteIP>Thu Nov 18 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>0</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>46090</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>81</id>
+		<date_courrier>Mon Dec 20 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>free</fai>
+		<date_collecteIP>Thu Dec  9 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>1</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>29000</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>82</id>
+		<date_courrier>Thu Dec 30 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>neuf</fai>
+		<date_collecteIP>Thu Oct 14 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>1</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>41000</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>83</id>
+		<date_courrier>Wed Nov 17 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>free</fai>
+		<date_collecteIP>Wed Oct 27 00:00:00 2010</date_collecteIP>
+		<musique>1</musique>
+		<film>0</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>59700</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>84</id>
+		<date_courrier>Wed Jan  5 00:00:00 2011</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>numericable</fai>
+		<date_collecteIP>Mon Jan  3 00:00:00 2011</date_collecteIP>
+		<musique>0</musique>
+		<film>0</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>50000</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>95</id>
+		<date_courrier>Wed Dec 29 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>orange</fai>
+		<date_collecteIP>Wed Jan  5 00:00:00 2011</date_collecteIP>
+		<musique>1</musique>
+		<film>0</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>54420</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>86</id>
+		<date_courrier>Wed Dec 15 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>free</fai>
+		<date_collecteIP>Sun Nov 28 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>0</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>41150</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>87</id>
+		<date_courrier>Thu Dec  2 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>free</fai>
+		<date_collecteIP>Sun Nov 21 00:00:00 2010</date_collecteIP>
+		<musique>1</musique>
+		<film>0</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>94800</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>88</id>
+		<date_courrier>Tue Dec 21 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>neuf</fai>
+		<date_collecteIP>Mon Nov 22 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>0</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>54000</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>89</id>
+		<date_courrier>Tue Dec 21 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>free</fai>
+		<date_collecteIP>Thu Dec  9 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>1</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>69100</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>90</id>
+		<date_courrier>Mon Jan  3 00:00:00 2011</date_courrier>
+		<type_courrier>lettre</type_courrier>
+		<fai>neuf</fai>
+		<date_collecteIP>Wed Dec 15 00:00:00 2010</date_collecteIP>
+		<musique>1</musique>
+		<film>0</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>59000</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>91</id>
+		<date_courrier>Wed Jan  5 00:00:00 2011</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>free</fai>
+		<date_collecteIP>Fri Dec 24 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>0</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>78130</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>92</id>
+		<date_courrier>Wed Jan  5 00:00:00 2011</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>free</fai>
+		<date_collecteIP>Thu Jan 27 00:00:00 2011</date_collecteIP>
+		<musique>0</musique>
+		<film>1</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>69100</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>93</id>
+		<date_courrier>Tue Jan  4 00:00:00 2011</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>free</fai>
+		<date_collecteIP>Wed Dec 15 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>1</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>75014</codepostal>
+	</temoignage>
+		<temoignage>
+		<id>94</id>
+		<date_courrier>Wed Dec 22 00:00:00 2010</date_courrier>
+		<type_courrier>mail</type_courrier>
+		<fai>neuf</fai>
+		<date_collecteIP>Tue Nov 23 00:00:00 2010</date_collecteIP>
+		<musique>0</musique>
+		<film>0</film>
+		<jeuxvideo>0</jeuxvideo>
+		<codepostal>75017</codepostal>
+	</temoignage>
+	</temoignages>
