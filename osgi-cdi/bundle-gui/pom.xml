@@ -7,7 +7,7 @@
     <artifactId>gui</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>bundle</packaging>
-    <name>osgi-cdi :: gui</name>
+    <name>Weld OSGi :: Samples :: gui</name>
     <dependencies>
         <dependency>
             <groupId>com.sample.osgi</groupId>
@@ -57,6 +57,8 @@
                             javax.annotation;
                             javax.enterprise.event;
                             javax.enterprise.inject;
+                            javax.enterprise.inject.spi;
+                            javax.enterprise.context.spi;
                             javax.inject;
                             org.jboss.weld.environment.osgi.events;
                             org.jboss.weld.environment.osgi.integration;
