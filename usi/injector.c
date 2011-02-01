@@ -66,8 +66,8 @@ int main(void) {
 	} else {
 		fprintf(stderr, "Error call inet_ntop \n");
 	}
-	int i = 0, count = 10000;
-	for (i=0; i<1000000; i++) {
+	int i = 0, count = 510000;
+	for (i=500001; i<1000000; i++) {
 		sockfd = socket(AF_INET, SOCK_STREAM, 0);
 		bzero(&servaddr, sizeof(servaddr));
 		servaddr.sin_family = AF_INET;

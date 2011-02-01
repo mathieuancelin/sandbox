@@ -1,10 +1,14 @@
 package org.jboss.weld.environment.osgi;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import org.jboss.weld.environment.osgi.events.ContainerShutdown;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleEvent;
 import org.osgi.framework.BundleListener;
+import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.ServiceEvent;
 import org.osgi.framework.ServiceListener;
 
@@ -28,6 +32,15 @@ public class WeldActivator implements BundleActivator, BundleListener, ServiceLi
         WeldContainerOwner.get().init();
         manager = WeldContainerOwner.container().instance().select(ShutdownManager.class).get();
         WeldContainerOwner.container().instance().select(WeldStartMessage.class).get();
+        ScheduledExecutorService exec = Executors.newScheduledThreadPool(1);
+        exec.scheduleAtFixedRate(new Thread() {
+
+            @Override
+            public void run() {
+                WeldContainerOwner.container().event().select(String.class).fire("scheduled");
+            }
+
+        }, 0, 2, TimeUnit.SECONDS);
     }
 
     @Override
@@ -40,6 +53,8 @@ public class WeldActivator implements BundleActivator, BundleListener, ServiceLi
     public void bundleChanged(BundleEvent event) {
         if (WeldContainerOwner.container() != null)
             WeldContainerOwner.container().event().fire(event);
+        if (event.getType() == BundleEvent.STOPPED)
+                System.out.print("Bundle STOPPED => " + event.getBundle().getSymbolicName());
         // TODO : scan the bundle and add bindings
         // TODO : register services in the registry
         // TODO : start startable OSGiBeans

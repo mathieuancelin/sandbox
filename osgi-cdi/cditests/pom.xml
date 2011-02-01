@@ -10,7 +10,7 @@
     <groupId>com.sample.osgi</groupId>
     <artifactId>cditests</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>osgi-cdi :: tests</name>
+    <name>Weld OSGi :: Tests :: Standalone</name>
     <url>http://maven.apache.org</url>
     <build>
         <plugins>

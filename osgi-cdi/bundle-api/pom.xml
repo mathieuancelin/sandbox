@@ -7,7 +7,7 @@
     <artifactId>bundle-api</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>bundle</packaging>
-    <name>osgi-cdi :: bundle-api</name> 
+    <name>Weld OSGi :: Samples :: bundle-api</name>
     <build>
         <plugins>
             <plugin>

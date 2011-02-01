@@ -7,7 +7,7 @@
     <artifactId>bundle2</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>bundle</packaging>
-    <name>osgi-cdi :: bundle2</name>
+    <name>Weld OSGi :: Samples :: bundle2</name>
     <dependencies>
         <dependency>
             <groupId>com.sample.osgi</groupId>

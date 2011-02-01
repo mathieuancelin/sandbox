@@ -11,4 +11,6 @@ package com.sample.osgi.cdi.starter;
  */
 public interface PaymentService {
     void pay(double price);
+
+    void start();
 }
