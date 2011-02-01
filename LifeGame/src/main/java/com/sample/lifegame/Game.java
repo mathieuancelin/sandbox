@@ -2,6 +2,7 @@ package com.sample.lifegame;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  *
@@ -15,27 +16,27 @@ public class Game {
 
     private Cell[][] cells = new Cell[CELLS_MAX][CELLS_MAX];
 
-    private int rounds;
+    private AtomicInteger rounds = new AtomicInteger();
 
     private boolean highLife;
 
     private static String line;
 
-    private List<Cell> alives = new ArrayList<Cell>();
-    
-    private List<Cell> deads = new ArrayList<Cell>();
-
     private Game() {}
 
     public static Game init(int maxCells, boolean highLife) {
+        if (maxCells % 2 != 0) {
+            throw new RuntimeException("You have to provider a pair number");
+        }
         Game game = new Game();
+        game.rounds.set(0);
         game.highLife = highLife;
         CELLS_MAX = maxCells;
         CELLS_MAX_MIN = maxCells - 1;
         for (int i = 0; i < CELLS_MAX; i++) {
             for (int j = 0; j < CELLS_MAX; j++) {
                 int value = (int)((Math.random() * 10) + 1);
-                if (value <= 8) {
+                if (value <= 7) {
                     game.cells[i][j] = new Cell(false);
                 } else {
                     game.cells[i][j] = new Cell(true);
@@ -70,8 +71,51 @@ public class Game {
         return game;
     }
 
+    private class RoundThread extends Thread {
+
+        private int iStart;
+        private int iStop;
+        private int jStart;
+        private int jStop;
+
+        public RoundThread(int iStart, int iStop, int jStart, int jStop) {
+            this.iStart = iStart;
+            this.iStop = iStop;
+            this.jStart = jStart;
+            this.jStop = jStop;
+        }
+
+        @Override
+        public void run() {
+            List<Cell> alives = new ArrayList<Cell>();
+            List<Cell> deads = new ArrayList<Cell>();
+            round(iStart, iStop, jStart, jStop, alives, deads);
+            ripper(alives, deads);
+        }
+    }
+
     public void round() {
-        rounds++;
+        rounds.incrementAndGet();
+        Thread thread1 = new RoundThread(0, CELLS_MAX / 2, 0, CELLS_MAX / 2);
+        Thread thread2 = new RoundThread(CELLS_MAX / 2, CELLS_MAX, 0, CELLS_MAX / 2);
+        Thread thread3 = new RoundThread(0, CELLS_MAX / 2, CELLS_MAX / 2, CELLS_MAX);
+        Thread thread4 = new RoundThread(CELLS_MAX / 2, CELLS_MAX, CELLS_MAX / 2, CELLS_MAX);
+        thread1.start();
+        thread2.start();
+        thread3.start();
+        thread4.start();
+        try {
+            thread1.join();
+            thread2.join();
+            thread3.join();
+            thread4.join();
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
+        //round(0, CELLS_MAX, 0, CELLS_MAX);
+    }
+
+    private void round(int iStart, int iStop, int jStart, int jStop, List<Cell> alives, List<Cell> deads) {
         Cell cell1 = null;
         Cell cell2 = null;
         Cell cell3 = null;
@@ -80,8 +124,8 @@ public class Game {
         Cell cell6 = null;
         Cell cell7 = null;
         Cell cell8 = null;
-        for (int i = 0; i < CELLS_MAX; i++) {
-            for (int j = 0; j < CELLS_MAX; j++) {
+        for (int i = iStart; i < iStop; i++) {
+            for (int j = jStart; j < jStop; j++) {
                 Cell actual = cells[i][j];
                 if (i == 0 && j == 0) {
                     cell1 = new Cell(false);
@@ -187,14 +231,14 @@ public class Game {
         }
     }
 
-    public void ripper() {
+    private void ripper(List<Cell> alives, List<Cell> deads) {
         for (Cell cell : alives) {
             cell.alive();
         }
+        alives.clear();
         for (Cell cell : deads) {
             cell.dead();
         }
-        alives.clear();
         deads.clear();
     }
 
@@ -203,7 +247,7 @@ public class Game {
     }
 
     public int getRounds() {
-        return rounds;
+        return rounds.get();
     }
 
     @Override

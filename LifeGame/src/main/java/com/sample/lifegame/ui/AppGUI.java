@@ -28,7 +28,6 @@ public class AppGUI extends javax.swing.JFrame {
         public void run() {
             while(gameRunning) {
                 game.round();
-                game.ripper();
                 jLabel2.setText(game.getRounds() + "");
                 jPanel1.validate();
                 jPanel1.repaint();
@@ -183,7 +182,6 @@ public class AppGUI extends javax.swing.JFrame {
             gameComponent.setCellSize(jPanel1.getSize());
             gameComponent.setBounds(0, 0, jPanel1.getWidth(), jPanel1.getHeight());
             game.round();
-            game.ripper();
             jLabel2.setText(game.getRounds() + "");
             jPanel1.validate();
             jPanel1.repaint();
