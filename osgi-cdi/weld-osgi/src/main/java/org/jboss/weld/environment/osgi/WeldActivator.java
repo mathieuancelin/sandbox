@@ -53,6 +53,8 @@ public class WeldActivator implements BundleActivator, BundleListener, ServiceLi
     public void bundleChanged(BundleEvent event) {
         if (WeldContainerOwner.container() != null)
             WeldContainerOwner.container().event().fire(event);
+        if (event.getType() == BundleEvent.STOPPED)
+                System.out.print("Bundle STOPPED => " + event.getBundle().getSymbolicName());
         // TODO : scan the bundle and add bindings
         // TODO : register services in the registry
         // TODO : start startable OSGiBeans

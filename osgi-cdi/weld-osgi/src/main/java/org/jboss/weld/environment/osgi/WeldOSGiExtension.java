@@ -29,6 +29,7 @@ import javax.enterprise.util.AnnotationLiteral;
 
 import org.jboss.weld.environment.osgi.beans.InstanceManager;
 import org.jboss.weld.environment.osgi.integration.DynamicServiceHandler;
+import org.jboss.weld.environment.osgi.integration.IntegrationProducer;
 import org.jboss.weld.environment.osgi.integration.OSGiService;
 import org.jboss.weld.environment.osgi.integration.Services;
 import org.jboss.weld.environment.osgi.integration.ServicesProducer;
@@ -54,6 +55,7 @@ public class WeldOSGiExtension implements Extension {
         event.addAnnotatedType(manager.createAnnotatedType(WeldStartMessage.class));
         event.addAnnotatedType(manager.createAnnotatedType(ServicesProducer.class));
         event.addAnnotatedType(manager.createAnnotatedType(Services.class));
+        event.addAnnotatedType(manager.createAnnotatedType(IntegrationProducer.class));
         event.addQualifier(OSGiService.class);
 
     }

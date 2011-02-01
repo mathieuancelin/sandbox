@@ -21,8 +21,21 @@ public class GuiActivator implements BundleActivator {
     @Override
     public void start(BundleContext context) throws Exception {
         weld = WeldContainerOwner.container();
+<<<<<<< HEAD
+        //weld.instance().select(Starter.class).get();
+        //weld.getBeanManager().getBeans(Starter.class);
+        AnnotatedType<Starter> type = weld.getBeanManager().createAnnotatedType(Starter.class);
+        InjectionTarget<Starter> it = weld.getBeanManager().createInjectionTarget(type);
+        CreationalContext ctx = weld.getBeanManager().createCreationalContext(null);
+        Starter instance = it.produce(ctx);  //call the constructor
+        it.inject(instance, ctx);  //call initializer methods and perform field injection
+        it.postConstruct(instance);  //call the @PostConstruct method
+        gui = weld.instance().select(SpellCheckerGui.class).get();
+        gui.start();
+=======
         weld.instance().select(Starter.class).get();
         weld.instance().select(SpellCheckerGui.class).get();
+>>>>>>> 43a0b824acaa4e138c30d10d750d7c9f927c84d6
     }
 
     @Override

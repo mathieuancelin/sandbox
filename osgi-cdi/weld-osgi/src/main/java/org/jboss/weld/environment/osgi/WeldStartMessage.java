@@ -12,8 +12,6 @@ import javax.inject.Singleton;
 @Singleton
 public class WeldStartMessage {
 
-    // FIXME : lifecycle doesn't work outside weld bundle
-
     @PostConstruct
     public void startingWeld() {
         System.out.println("\nWeld is now started inside OSGi !!!\n");
