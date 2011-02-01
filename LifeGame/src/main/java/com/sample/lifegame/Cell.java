@@ -2,10 +2,11 @@ package com.sample.lifegame;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
- * @author mathieu
+ * @author Mathieu ANCELIN
  */
 public class Cell {
 
@@ -23,7 +24,7 @@ public class Cell {
         this.i = i;
     }
 
-    public void initCell(Cell[][] cells) {
+    public void initCell(Map<Key, Cell> cells) {
         addCell(cells, i - 1, j - 1);
         addCell(cells, i - 1, j);
         addCell(cells, i - 1, j + 1);
@@ -75,11 +76,12 @@ public class Cell {
         return alives;
     }
 
-    private  void addCell(Cell[][] cells, int i, int j) {
+    private void addCell(Map<Key, Cell> cells, int i, int j) {
         Cell cell = null;
         try {
-            cell = cells[i][j];
-        } catch (Exception e) {}
+            cell = cells.get(new Key(i, j));
+        } catch (Exception e) {
+        }
         if (cell != null) {
             addNeighBour(cell);
         }
@@ -95,6 +97,14 @@ public class Cell {
 
     private void dead() {
         alive = false;
+    }
+
+    public int getJ() {
+        return j;
+    }
+
+    public int getI() {
+        return i;
     }
 
     @Override
@@ -123,4 +133,43 @@ public class Cell {
         return "cell : " + System.identityHashCode(this) + " [" + j + ", " + i + "] => " + isAlive();
     }
 
+    public static class Key {
+
+        private final int i;
+        private final int j;
+
+        public Key(int i, int j) {
+            this.i = i;
+            this.j = j;
+        }
+
+        public int getI() {
+            return i;
+        }
+
+        public int getJ() {
+            return j;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (obj instanceof Key) {
+                Key key = (Key) obj;
+                if (i == key.i) {
+                    if (j == key.j) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        @Override
+        public int hashCode() {
+            int hash = 5;
+            hash = 61 * hash + this.i;
+            hash = 61 * hash + this.j;
+            return hash;
+        }
+    }
 }

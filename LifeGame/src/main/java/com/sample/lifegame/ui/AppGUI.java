@@ -4,7 +4,7 @@ import com.sample.lifegame.Game;
 
 /**
  *
- * @author mathieu
+ * @author Mathieu ANCELIN
  */
 public class AppGUI extends javax.swing.JFrame {
 
@@ -20,7 +20,14 @@ public class AppGUI extends javax.swing.JFrame {
         gameComponent = new GameComponent();
         gameComponent.setBounds(0, 0, jPanel1.getWidth(), jPanel1.getHeight());
         jPanel1.add(gameComponent, 0);
-        setVisible(true);
+    }
+
+    public void start() {
+        game = Game.init(CASES, jSlider1.getValue(), jCheckBox1.isSelected(), jCheckBox2.isSelected());
+        gameComponent.setGame(game);
+        gameComponent.setCellSize(jPanel1.getSize());
+        gameComponent.setBounds(0, 0, jPanel1.getWidth(), jPanel1.getHeight());
+        this.setVisible(true);
     }
 
     public class GameThread extends Thread {
@@ -118,6 +125,11 @@ public class AppGUI extends javax.swing.JFrame {
         jCheckBox1.setFocusable(false);
         jCheckBox1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jCheckBox1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jCheckBox1);
 
         jLabel3.setText(" HighLife");
@@ -126,6 +138,11 @@ public class AppGUI extends javax.swing.JFrame {
         jCheckBox2.setFocusable(false);
         jCheckBox2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jCheckBox2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox2ActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jCheckBox2);
 
         jLabel4.setText("Clown");
@@ -168,6 +185,8 @@ public class AppGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        jCheckBox1.setEnabled(false);
+        jCheckBox2.setEnabled(false);
         if (!play) {
             jButton1.setText("Pause");
             play = true;
@@ -187,6 +206,8 @@ public class AppGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        jCheckBox1.setEnabled(true);
+        jCheckBox2.setEnabled(true);
         gameRunning = false;
         game = Game.init(CASES, jSlider1.getValue(), jCheckBox1.isSelected(), jCheckBox2.isSelected());
         if (dev) {
@@ -209,6 +230,8 @@ public class AppGUI extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         if (game != null) {
+            jCheckBox1.setEnabled(false);
+            jCheckBox2.setEnabled(false);
             gameComponent.setGame(game);
             gameComponent.setCellSize(jPanel1.getSize());
             gameComponent.setBounds(0, 0, jPanel1.getWidth(), jPanel1.getHeight());
@@ -218,6 +241,14 @@ public class AppGUI extends javax.swing.JFrame {
             jPanel1.repaint();
         }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        game = Game.init(CASES, jSlider1.getValue(), jCheckBox1.isSelected(), jCheckBox2.isSelected());
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
+
+    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
+        game = Game.init(CASES, jSlider1.getValue(), jCheckBox1.isSelected(), jCheckBox2.isSelected());
+    }//GEN-LAST:event_jCheckBox2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
