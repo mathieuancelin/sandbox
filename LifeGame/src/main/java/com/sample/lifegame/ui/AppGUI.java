@@ -54,6 +54,9 @@ public class AppGUI extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JToolBar.Separator();
         jCheckBox1 = new javax.swing.JCheckBox();
+        jLabel3 = new javax.swing.JLabel();
+        jSeparator4 = new javax.swing.JToolBar.Separator();
+        jSlider1 = new javax.swing.JSlider();
         jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -114,6 +117,16 @@ public class AppGUI extends javax.swing.JFrame {
         jCheckBox1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(jCheckBox1);
 
+        jLabel3.setText(" HighLife");
+        jToolBar1.add(jLabel3);
+        jToolBar1.add(jSeparator4);
+
+        jSlider1.setMaximum(9);
+        jSlider1.setMinimum(1);
+        jSlider1.setPaintLabels(true);
+        jSlider1.setValue(7);
+        jToolBar1.add(jSlider1);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -122,7 +135,7 @@ public class AppGUI extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 541, Short.MAX_VALUE)
+            .addGap(0, 522, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -148,7 +161,7 @@ public class AppGUI extends javax.swing.JFrame {
             jButton1.setText("Pause");
             play = true;
             if (game == null) {
-                game = Game.init(CASES, jCheckBox1.isSelected());
+                game = Game.init(CASES, jSlider1.getValue(), jCheckBox1.isSelected());
             }
             gameComponent.setGame(game);
             gameComponent.setCellSize(jPanel1.getSize());
@@ -164,7 +177,7 @@ public class AppGUI extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         gameRunning = false;
-        game = Game.init(CASES, jCheckBox1.isSelected());
+        game = Game.init(CASES, jSlider1.getValue(), jCheckBox1.isSelected());
         play = false;
         jButton1.setText("Run");
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -195,10 +208,13 @@ public class AppGUI extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
+    private javax.swing.JToolBar.Separator jSeparator4;
+    private javax.swing.JSlider jSlider1;
     private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables
 

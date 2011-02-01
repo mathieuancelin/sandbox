@@ -11,20 +11,16 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Game {
 
     public static int CELLS_MAX = 100;
-
     public static int CELLS_MAX_MIN = 99;
-
     private Cell[][] cells = new Cell[CELLS_MAX][CELLS_MAX];
-
     private AtomicInteger rounds = new AtomicInteger();
-
     private boolean highLife;
-
     private static String line;
 
-    private Game() {}
+    private Game() {
+    }
 
-    public static Game init(int maxCells, boolean highLife) {
+    public static Game init(int maxCells, int sensibility, boolean highLife) {
         if (maxCells % 2 != 0) {
             throw new RuntimeException("You have to provider a pair number");
         }
@@ -35,8 +31,8 @@ public class Game {
         CELLS_MAX_MIN = maxCells - 1;
         for (int i = 0; i < CELLS_MAX; i++) {
             for (int j = 0; j < CELLS_MAX; j++) {
-                int value = (int)((Math.random() * 10) + 1);
-                if (value <= 7) {
+                int value = (int) ((Math.random() * 10) + 1);
+                if (value <= sensibility) {
                     game.cells[i][j] = new Cell(false);
                 } else {
                     game.cells[i][j] = new Cell(true);
@@ -154,7 +150,7 @@ public class Game {
                     cell6 = cells[i + 1][j - 1];
                     cell7 = cells[i + 1][j];
                     cell8 = cells[i + 1][j + 1];
-                } else if (i > 0  && i < (CELLS_MAX_MIN) && j == 0) {
+                } else if (i > 0 && i < (CELLS_MAX_MIN) && j == 0) {
                     cell1 = new Cell(false);
                     cell2 = cells[i - 1][j];
                     cell3 = cells[i - 1][j + 1];
@@ -217,7 +213,7 @@ public class Game {
                     }
                 } else {
                     if (highLife) {
-                        if(count == 6) {
+                        if (count == 6) {
                             alives.add(actual);
                         } else {
                             deads.add(actual);
