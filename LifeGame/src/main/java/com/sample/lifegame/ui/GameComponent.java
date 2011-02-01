@@ -7,7 +7,6 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 import javax.swing.JComponent;
 /**
@@ -47,7 +46,6 @@ public class GameComponent extends JComponent {
                         g2.setColor(Color.WHITE);
                     }
                     g2.fill(new Rectangle2D.Double(x, y, cellX, cellY));
-//                    g2.fill(new Ellipse2D.Double(x, y, cellX, cellY));
                     g2.setColor(Color.BLACK);
                     g2.draw(new Rectangle2D.Double(x, y, cellX, cellY));
                     x += cellX;

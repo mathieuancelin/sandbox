@@ -13,6 +13,7 @@ public class AppGUI extends javax.swing.JFrame {
     private GameComponent gameComponent;
     private boolean gameRunning = false;
     private boolean play = false;
+    private boolean dev = false;
 
     public AppGUI() {
         initComponents();
@@ -55,6 +56,8 @@ public class AppGUI extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JToolBar.Separator();
         jCheckBox1 = new javax.swing.JCheckBox();
         jLabel3 = new javax.swing.JLabel();
+        jCheckBox2 = new javax.swing.JCheckBox();
+        jLabel4 = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JToolBar.Separator();
         jSlider1 = new javax.swing.JSlider();
         jPanel1 = new javax.swing.JPanel();
@@ -119,6 +122,14 @@ public class AppGUI extends javax.swing.JFrame {
 
         jLabel3.setText(" HighLife");
         jToolBar1.add(jLabel3);
+
+        jCheckBox2.setFocusable(false);
+        jCheckBox2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jCheckBox2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(jCheckBox2);
+
+        jLabel4.setText("Clown");
+        jToolBar1.add(jLabel4);
         jToolBar1.add(jSeparator4);
 
         jSlider1.setMaximum(9);
@@ -161,7 +172,7 @@ public class AppGUI extends javax.swing.JFrame {
             jButton1.setText("Pause");
             play = true;
             if (game == null) {
-                game = Game.init(CASES, jSlider1.getValue(), jCheckBox1.isSelected());
+                game = Game.init(CASES, jSlider1.getValue(), jCheckBox1.isSelected(), jCheckBox2.isSelected());
             }
             gameComponent.setGame(game);
             gameComponent.setCellSize(jPanel1.getSize());
@@ -177,7 +188,14 @@ public class AppGUI extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         gameRunning = false;
-        game = Game.init(CASES, jSlider1.getValue(), jCheckBox1.isSelected());
+        game = Game.init(CASES, jSlider1.getValue(), jCheckBox1.isSelected(), jCheckBox2.isSelected());
+        if (dev) {
+            gameComponent.setGame(game);
+            gameComponent.setCellSize(jPanel1.getSize());
+            gameComponent.setBounds(0, 0, jPanel1.getWidth(), jPanel1.getHeight());
+            jPanel1.validate();
+            jPanel1.repaint();
+        }
         play = false;
         jButton1.setText("Run");
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -206,9 +224,11 @@ public class AppGUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
