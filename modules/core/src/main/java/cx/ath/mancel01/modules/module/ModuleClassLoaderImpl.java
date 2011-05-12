@@ -1,28 +1,36 @@
 package cx.ath.mancel01.modules.module;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 
 import cx.ath.mancel01.modules.Modules;
+import cx.ath.mancel01.modules.api.ModuleClassLoader;
+import cx.ath.mancel01.modules.api.Resource;
 import java.io.File;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ModuleClassLoader extends URLClassLoader {
+public class ModuleClassLoaderImpl extends URLClassLoader implements ModuleClassLoader {
 
-    private static final Logger logger = LoggerFactory.getLogger(ModuleClassLoader.class);
+    private static final Logger logger = LoggerFactory.getLogger(ModuleClassLoaderImpl.class);
 
     public static final List<String> bootDelegationList;
 
     private final Module module;
 
     private final List<String> managedClasses;
+    
+    private final List<Resource> managedResources;
 
     static {
         bootDelegationList = new ArrayList<String>();
@@ -34,21 +42,45 @@ public class ModuleClassLoader extends URLClassLoader {
         bootDelegationList.add("com.sun.");
     }
 
-    public ModuleClassLoader(URL[] urls, Module from) {
+    public ModuleClassLoaderImpl(URL[] urls, Module from) {
         super(urls, Modules.CLASSPATH_MODULE.getLoader());
         this.module = from;
         managedClasses = new ArrayList<String>();
-        URL root = module.configuration().rootResource();
+        managedResources = new ArrayList<Resource>();
+        final URL root = module.configuration().rootResource();
         String fileName = root.getFile();
         try {
-            ZipFile file = new ZipFile(new File(fileName));
+            final ZipFile file = new ZipFile(new File(fileName));
             Enumeration entries = file.entries();
             while (entries.hasMoreElements()) {
-                ZipEntry entry = (ZipEntry) entries.nextElement();
+                final ZipEntry entry = (ZipEntry) entries.nextElement();
                 if (entry.getName().endsWith(".class")) {
                     String className = entry.getName().substring(0, entry.getName().lastIndexOf("."));
                     className = className.replace("/", ".").replace("$", ".");
                     managedClasses.add(className);
+                } else {
+                    managedResources.add(new Resource() {
+                        @Override
+                        public URL getURL() {
+                            try {
+                                return new URL(root.toString() + "!" + entry.getName());
+                            } catch (MalformedURLException ex) {
+                                return null;
+                            }
+                        }
+                        @Override
+                        public InputStream getInsputStream() {
+                            try {
+                                return file.getInputStream(entry);
+                            } catch (IOException ex) {
+                                return null;
+                            }
+                        }
+                        @Override
+                        public String getName() {
+                            return entry.getName();
+                        }
+                    });
                 }
             }
         } catch (Exception ex) {
@@ -102,5 +134,37 @@ public class ModuleClassLoader extends URLClassLoader {
             }
         }
         return can;
+    }
+
+    @Override
+    public Module getModule() {
+        return module;
+    }
+
+    @Override
+    public URL getResource(String name) {
+        return module.getResource(name);
+    }
+
+    @Override
+    public InputStream getResourceAsStream(String name) {
+        return module.getResourceAsStream(name);
+    }
+
+    @Override
+    public Enumeration<URL> getResources(String name) throws IOException {
+        return module.getResources(name);
+    }
+
+    URL getJarResource(String name) {
+        return super.getResource(name);
+    }
+
+    InputStream getJarResourceAsStream(String name) {
+        return super.getResourceAsStream(name);
+    }
+
+    Enumeration<URL> getJarResources(String name) throws IOException {
+        return super.getResources(name);
     }
 }

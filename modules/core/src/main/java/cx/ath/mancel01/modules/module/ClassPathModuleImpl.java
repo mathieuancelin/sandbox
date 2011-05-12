@@ -7,15 +7,15 @@ import java.util.Collections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ClassPathModule extends Module {
+public class ClassPathModuleImpl extends Module {
 
-    private static final Logger logger = LoggerFactory.getLogger(ClassPathModule.class);
+    private static final Logger logger = LoggerFactory.getLogger(ClassPathModuleImpl.class);
 
     public static final String IDENTIFIER = "Delegated-ClassPath-" + System.getProperty("java.specification.name");
 
     private final ClassLoader loader;
 
-    public ClassPathModule() {
+    public ClassPathModuleImpl() {
         super(new Configuration() {
 
             @Override

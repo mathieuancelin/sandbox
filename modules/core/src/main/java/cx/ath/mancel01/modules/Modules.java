@@ -1,6 +1,6 @@
 package cx.ath.mancel01.modules;
 
-import cx.ath.mancel01.modules.module.ClassPathModule;
+import cx.ath.mancel01.modules.module.ClassPathModuleImpl;
 import cx.ath.mancel01.modules.api.Configuration;
 import cx.ath.mancel01.modules.module.Module;
 import java.io.File;
@@ -22,7 +22,7 @@ public class Modules {
 
     private static final Logger logger = LoggerFactory.getLogger(Modules.class);
 
-    public static final ClassPathModule CLASSPATH_MODULE = new ClassPathModule();
+    public static final ClassPathModuleImpl CLASSPATH_MODULE = new ClassPathModuleImpl();
 
     private Map<String, Module> modules = new HashMap<String, Module>();
 

@@ -2,11 +2,16 @@ package cx.ath.mancel01.modules.module;
 
 import cx.ath.mancel01.modules.api.Configuration;
 import cx.ath.mancel01.modules.Modules;
-import cx.ath.mancel01.modules.util.MainThread;
+import cx.ath.mancel01.modules.api.ModuleClassLoader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Enumeration;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,21 +19,13 @@ import org.slf4j.LoggerFactory;
 public class Module {
 
     public static final String VERSION_SEPARATOR = ":";
-
     private static final Logger logger = LoggerFactory.getLogger(Module.class);
-
     public final String identifier;
-
     public final String name;
-
     public final String version;
-
-    private ModuleClassLoader moduleClassloader;
-
+    private ModuleClassLoaderImpl moduleClassloader;
     private final Collection<String> dependencies;
-
     private final Modules delegateModules;
-
     private final Configuration configuration;
 
     public Module(final Configuration configuration, Modules modules) {
@@ -39,17 +36,22 @@ public class Module {
         this.configuration = configuration;
         this.delegateModules = modules;
         if (configuration.rootResource() != null) {
-            this.moduleClassloader = new ModuleClassLoader(new URL[] {configuration.rootResource()}, this);
+            this.moduleClassloader = new ModuleClassLoaderImpl(new URL[]{configuration.rootResource()}, this);
         }
     }
 
     public void start() {
         if (configuration.startable()) {
-            Class<?> main = load(configuration.mainClass());
             try {
+                final Class<?> main = load(configuration.mainClass());
                 Method mainMethod = main.getMethod("main", String[].class);
-                MainThread t = new MainThread(mainMethod);
-                t.start();
+                final int modifiers = mainMethod.getModifiers();
+                if (!Modifier.isStatic(modifiers)) {
+                    throw new NoSuchMethodException("Main method is not static for " + this);
+                }
+                //MainThread t = new MainThread(mainMethod);
+                //t.start();
+                mainMethod.invoke(null, new Object[]{});
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
             }
@@ -135,7 +137,71 @@ public class Module {
         return hash;
     }
 
+    public Enumeration<URL> getResources(String name) throws IOException {
+        Enumeration<URL> urls = moduleClassloader.getJarResources(name);
+        if (urls == null) {
+            List<URL> externalUrls = new ArrayList<URL>();
+            for (Module mod : delegateModules.getModules().values()) {
+                Enumeration<URL> tmp = mod.getResources(name);
+                if (tmp != null) {
+                    externalUrls.addAll(Collections.list(tmp));
+                }
+            }
+            return Collections.enumeration(externalUrls);
+        } else {
+            return urls;
+        }
+    }
+
+
+    public InputStream getResourceAsStream(String name) {
+        InputStream is = moduleClassloader.getJarResourceAsStream(name);
+        if (is == null) {
+            List<InputStream> iss = new ArrayList<InputStream>();
+            for (Module mod : delegateModules.getModules().values()) {
+                InputStream tmp = mod.getResourceAsStream(name);
+                if (tmp != null) {
+                    iss.add(mod.getResourceAsStream(name));
+                }
+            }
+            for (InputStream i : iss) {
+                return i;
+            }
+            return null;
+        } else {
+            return is;
+        }
+    }
+
+    public URL getResource(String name) {
+        URL url = moduleClassloader.getJarResource(name);
+        if (url == null) {
+            List<URL> urls = new ArrayList<URL>();
+            for (Module mod : delegateModules.getModules().values()) {
+                URL tmp = mod.getResource(name);
+                if (tmp != null) {
+                    urls.add(mod.getResource(name));
+                }
+            }
+            for (URL u : urls) {
+                return u;
+            }
+            return null;
+        } else {
+            return url;
+        }
+    }
+
     public static String getIdentifier(String name, String version) {
         return name + Module.VERSION_SEPARATOR + version;
+    }
+
+    public static Module getModule(Class<?> clazz) {
+        ClassLoader loader = clazz.getClassLoader();
+        if (ModuleClassLoader.class.isAssignableFrom(loader.getClass())) {
+            ModuleClassLoader classLoader = (ModuleClassLoader) loader;
+            return classLoader.getModule();
+        }
+        return Modules.CLASSPATH_MODULE;
     }
 }

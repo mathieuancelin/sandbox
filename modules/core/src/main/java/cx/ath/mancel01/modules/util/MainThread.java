@@ -1,16 +1,17 @@
 package cx.ath.mancel01.modules.util;
 
 import java.lang.reflect.Method;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.concurrent.atomic.AtomicBoolean;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MainThread extends Thread {
 
+    private static final Logger logger = LoggerFactory.getLogger(MainThread.class);
+
     private final Method main;
 
-    private boolean ended = false;
-
-    private int returnValue;
+    private AtomicBoolean ended = new AtomicBoolean(false);
 
     public MainThread(Method main) {
         this.main = main;
@@ -18,26 +19,16 @@ public class MainThread extends Thread {
 
     @Override
     public void run() {
-        int ret = 0;
         try {
             Object arg = new String[] {};
-            Object returnedObject = main.invoke(null, arg);
-            if (returnedObject != null) {
-                ret = (Integer) returnedObject;
-            }
+            main.invoke(null, arg);
         } catch (Exception ex) {
-            Logger.getLogger(MainThread.class.getName()).log(Level.SEVERE, null, ex);
-            ret = -1;
+            logger.error("Error while running main method : ", ex);
         }
-        ended = true;
-        returnValue = ret;
+        ended.compareAndSet(false, true);
     }
 
     public boolean isEnded() {
-        return ended;
-    }
-
-    public int getReturnValue() {
-        return returnValue;
+        return ended.get();
     }
 }
