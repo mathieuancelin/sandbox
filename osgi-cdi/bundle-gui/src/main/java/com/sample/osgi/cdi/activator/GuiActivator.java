@@ -2,6 +2,9 @@ package com.sample.osgi.cdi.activator;
 
 import com.sample.osgi.cdi.starter.Starter;
 import com.sample.osgi.cdi.gui.SpellCheckerGui;
+import javax.enterprise.context.spi.CreationalContext;
+import javax.enterprise.inject.spi.AnnotatedType;
+import javax.enterprise.inject.spi.InjectionTarget;
 import org.jboss.weld.environment.osgi.WeldContainerOwner;
 import org.jboss.weld.environment.osgi.WeldContainer;
 import org.osgi.framework.BundleActivator;

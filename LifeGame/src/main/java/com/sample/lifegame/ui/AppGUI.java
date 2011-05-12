@@ -1,0 +1,272 @@
+package com.sample.lifegame.ui;
+
+import com.sample.lifegame.Game;
+
+/**
+ *
+ * @author Mathieu ANCELIN
+ */
+public class AppGUI extends javax.swing.JFrame {
+
+    private static final int CASES = 100;
+    private Game game;
+    private GameComponent gameComponent;
+    private boolean gameRunning = false;
+    private boolean play = false;
+    private boolean dev = false;
+
+    public AppGUI() {
+        initComponents();
+        gameComponent = new GameComponent();
+        gameComponent.setBounds(0, 0, jPanel1.getWidth(), jPanel1.getHeight());
+        jPanel1.add(gameComponent, 0);
+    }
+
+    public void start() {
+        game = Game.init(CASES, jSlider1.getValue(), jCheckBox1.isSelected(), jCheckBox2.isSelected());
+        gameComponent.setGame(game);
+        gameComponent.setCellSize(jPanel1.getSize());
+        gameComponent.setBounds(0, 0, jPanel1.getWidth(), jPanel1.getHeight());
+        this.setVisible(true);
+    }
+
+    public class GameThread extends Thread {
+
+        @Override
+        public void run() {
+            while(gameRunning) {
+                game.round();
+                jLabel2.setText(game.getRounds() + "");
+                jPanel1.validate();
+                jPanel1.repaint();
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException ex) {
+                    // Ignore
+                }
+            }
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jToolBar1 = new javax.swing.JToolBar();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JToolBar.Separator();
+        jButton3 = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JToolBar.Separator();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jSeparator3 = new javax.swing.JToolBar.Separator();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jLabel3 = new javax.swing.JLabel();
+        jCheckBox2 = new javax.swing.JCheckBox();
+        jLabel4 = new javax.swing.JLabel();
+        jSeparator4 = new javax.swing.JToolBar.Separator();
+        jSlider1 = new javax.swing.JSlider();
+        jPanel1 = new javax.swing.JPanel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                formComponentResized(evt);
+            }
+        });
+
+        jToolBar1.setFloatable(false);
+        jToolBar1.setRollover(true);
+
+        jButton1.setText("Run");
+        jButton1.setFocusable(false);
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButton1);
+
+        jButton2.setText("Stop");
+        jButton2.setFocusable(false);
+        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButton2);
+        jToolBar1.add(jSeparator2);
+
+        jButton3.setText("Round");
+        jButton3.setActionCommand("jButton3");
+        jButton3.setFocusable(false);
+        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButton3);
+        jToolBar1.add(jSeparator1);
+
+        jLabel1.setText("rounds :   ");
+        jToolBar1.add(jLabel1);
+
+        jLabel2.setText("0");
+        jToolBar1.add(jLabel2);
+        jToolBar1.add(jSeparator3);
+
+        jCheckBox1.setFocusable(false);
+        jCheckBox1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jCheckBox1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jCheckBox1);
+
+        jLabel3.setText(" HighLife");
+        jToolBar1.add(jLabel3);
+
+        jCheckBox2.setFocusable(false);
+        jCheckBox2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jCheckBox2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox2ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jCheckBox2);
+
+        jLabel4.setText("Clown");
+        jToolBar1.add(jLabel4);
+        jToolBar1.add(jSeparator4);
+
+        jSlider1.setMaximum(9);
+        jSlider1.setMinimum(1);
+        jSlider1.setPaintLabels(true);
+        jSlider1.setValue(7);
+        jToolBar1.add(jSlider1);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 650, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 522, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        jCheckBox1.setEnabled(false);
+        jCheckBox2.setEnabled(false);
+        if (!play) {
+            jButton1.setText("Pause");
+            play = true;
+            if (game == null) {
+                game = Game.init(CASES, jSlider1.getValue(), jCheckBox1.isSelected(), jCheckBox2.isSelected());
+            }
+            gameComponent.setGame(game);
+            gameComponent.setCellSize(jPanel1.getSize());
+            gameComponent.setBounds(0, 0, jPanel1.getWidth(), jPanel1.getHeight());
+            gameRunning = true;
+            new GameThread().start();
+        } else {
+            gameRunning = false;
+            play = false;
+            jButton1.setText("Run");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        jCheckBox1.setEnabled(true);
+        jCheckBox2.setEnabled(true);
+        gameRunning = false;
+        game = Game.init(CASES, jSlider1.getValue(), jCheckBox1.isSelected(), jCheckBox2.isSelected());
+        if (dev) {
+            gameComponent.setGame(game);
+            gameComponent.setCellSize(jPanel1.getSize());
+            gameComponent.setBounds(0, 0, jPanel1.getWidth(), jPanel1.getHeight());
+            jPanel1.validate();
+            jPanel1.repaint();
+        }
+        play = false;
+        jButton1.setText("Run");
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
+        if (gameComponent != null) {
+            gameComponent.setCellSize(jPanel1.getSize());
+            gameComponent.setBounds(0, 0, jPanel1.getWidth(), jPanel1.getHeight());
+        }
+    }//GEN-LAST:event_formComponentResized
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        if (game != null) {
+            jCheckBox1.setEnabled(false);
+            jCheckBox2.setEnabled(false);
+            gameComponent.setGame(game);
+            gameComponent.setCellSize(jPanel1.getSize());
+            gameComponent.setBounds(0, 0, jPanel1.getWidth(), jPanel1.getHeight());
+            game.round();
+            jLabel2.setText(game.getRounds() + "");
+            jPanel1.validate();
+            jPanel1.repaint();
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        game = Game.init(CASES, jSlider1.getValue(), jCheckBox1.isSelected(), jCheckBox2.isSelected());
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
+
+    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
+        game = Game.init(CASES, jSlider1.getValue(), jCheckBox1.isSelected(), jCheckBox2.isSelected());
+    }//GEN-LAST:event_jCheckBox2ActionPerformed
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JToolBar.Separator jSeparator1;
+    private javax.swing.JToolBar.Separator jSeparator2;
+    private javax.swing.JToolBar.Separator jSeparator3;
+    private javax.swing.JToolBar.Separator jSeparator4;
+    private javax.swing.JSlider jSlider1;
+    private javax.swing.JToolBar jToolBar1;
+    // End of variables declaration//GEN-END:variables
+
+}

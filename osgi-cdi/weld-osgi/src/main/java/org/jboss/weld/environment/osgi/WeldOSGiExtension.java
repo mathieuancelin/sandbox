@@ -11,6 +11,8 @@ import java.util.Set;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.context.spi.CreationalContext;
 import javax.enterprise.event.Observes;
+import javax.enterprise.event.Reception;
+import javax.enterprise.event.TransactionPhase;
 import javax.enterprise.inject.Any;
 import javax.enterprise.inject.CreationException;
 import javax.enterprise.inject.Default;
@@ -20,6 +22,7 @@ import javax.enterprise.inject.spi.BeanManager;
 import javax.enterprise.inject.spi.BeforeBeanDiscovery;
 import javax.enterprise.inject.spi.Extension;
 import javax.enterprise.inject.spi.InjectionPoint;
+import javax.enterprise.inject.spi.ObserverMethod;
 import javax.enterprise.inject.spi.ProcessBean;
 import javax.enterprise.inject.spi.ProcessInjectionTarget;
 import javax.enterprise.util.AnnotationLiteral;
@@ -54,14 +57,49 @@ public class WeldOSGiExtension implements Extension {
         event.addAnnotatedType(manager.createAnnotatedType(Services.class));
         event.addAnnotatedType(manager.createAnnotatedType(IntegrationProducer.class));
         event.addQualifier(OSGiService.class);
+
     }
     // TODO : add registrable services
     // TODO : add startable components (@OSGiBean) with lifecycle to be started at bundle install
     // TODO : add injection for service registry, context, bundle, log service, entreprise stuff
 
     public void registerWeldOSGiContexts(@Observes AfterBeanDiscovery event) {
+        //event.addContext(new OSGIContext());
         for (Iterator<Type> iterator = this.servicesToBeInjected.keySet().iterator(); 
                                                 iterator.hasNext();) {
+            event.addObserverMethod(new ObserverMethod() {
+
+                @Override
+                public Class getBeanClass() {
+                    return WeldOSGiExtension.class;
+                }
+
+                @Override
+                public Type getObservedType() {
+                    return Object.class;
+                }
+
+                @Override
+                public Set getObservedQualifiers() {
+                    return new HashSet();
+                }
+
+                @Override
+                public Reception getReception() {
+                    return null;
+                }
+
+                @Override
+                public TransactionPhase getTransactionPhase() {
+                    return null;
+                }
+
+                @Override
+                public void notify(Object event) {
+                    System.out.println("received an event ahahah");
+                }
+
+            });
             Type type =  iterator.next();
             if (!(type instanceof Class)) {
                 //XXX: need to handle Instance<Class>. This fails currently

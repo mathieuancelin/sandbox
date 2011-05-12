@@ -8,8 +8,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.annotation.PostConstruct;
+<<<<<<< HEAD
+import javax.enterprise.event.Event;
+=======
 import javax.annotation.PreDestroy;
 import javax.enterprise.event.Observes;
+>>>>>>> 43a0b824acaa4e138c30d10d750d7c9f927c84d6
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.swing.JButton;
@@ -49,6 +53,9 @@ public class SpellCheckerGui extends JFrame {
     @Inject
     private SpellCheckerSubstituteImpl otherSpellService;
 
+    @Inject
+    private Event<String> event;
+
     public SpellCheckerGui() {
         super();
         initComponents();      
@@ -80,6 +87,7 @@ public class SpellCheckerGui extends JFrame {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
                 check2();
+                event.fire("message broadcast");
             }
         });
 
