@@ -15,6 +15,8 @@ public class Game {
     private int cellsMaxSize = 100;
     private Map<Key, Cell> cells = new HashMap<Key, Cell>();
     private AtomicInteger rounds = new AtomicInteger();
+    private long statsRoundTime = 0;
+    private long lastRound = 0;
 
     private Game() {
     }
@@ -24,6 +26,7 @@ public class Game {
             throw new RuntimeException("You have to provider a pair number");
         }
         Game game = new Game();
+        game.statsRoundTime = 0;
         game.rounds.set(0);
         game.cellsMaxSize = maxCells;
         for (int i = 0; i < maxCells; i++) {
@@ -64,9 +67,12 @@ public class Game {
     }
 
     public void round() {
+        long start = System.currentTimeMillis();
         rounds.incrementAndGet();
         naturalSelection();
         godWill();
+        lastRound = (System.currentTimeMillis() - start);
+        statsRoundTime += lastRound;
     }
 
     private void naturalSelection() {
@@ -93,6 +99,14 @@ public class Game {
 
     public int getCellsMaxSize() {
         return cellsMaxSize;
+    }
+
+    public long getAverageRoundTime() {
+        return (statsRoundTime / rounds.get());
+    }
+
+    public long getLastRoundTime() {
+        return lastRound;
     }
 
     private class RoundThread extends Thread {
