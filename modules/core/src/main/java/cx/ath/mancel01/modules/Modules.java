@@ -91,7 +91,8 @@ public class Modules {
             ZipFile file = new ZipFile(new File(fileName));
             ZipEntry conf = file.getEntry("META-INF/configuration.properties");
             if (conf == null) {
-                throw new IllegalStateException("Jar doesn't contains configuration.properties");
+                return getConfigurationFromNonModularJar(jar);
+                //throw new IllegalStateException("Jar doesn't contains configuration.properties");
             }
             Properties p = new Properties();
             p.load(file.getInputStream(conf));
@@ -141,5 +142,98 @@ public class Modules {
         } catch (Exception ex) {
             throw new IllegalStateException("can't read metadata");
         }
+    }
+
+    private static Configuration getConfigurationFromNonModularJar(final URL jar) {
+        return new Configuration() {
+
+            private final String name = new File(jar.getFile()).getName();
+
+            @Override
+            public String name() {
+                return name;
+            }
+
+            @Override
+            public String version() {
+                return "";
+            }
+
+            @Override
+            public String identifier() {
+                return name;
+            }
+
+            @Override
+            public Collection<String> dependencies() {
+                return Collections.emptyList();
+            }
+
+            @Override
+            public Collection<String> optionalDependencies() {
+                return Collections.emptyList();
+            }
+
+            @Override
+            public boolean startable() {
+                return false;
+            }
+
+            @Override
+            public String mainClass() {
+                return null;
+            }
+
+            @Override
+            public URL rootResource() {
+                return jar;
+            }
+        };
+    }
+
+    public static Configuration getConfigurationFromNonModularJar(final URL jar,
+            final String name, final String version) {
+        return new Configuration() {
+
+            @Override
+            public String name() {
+                return name;
+            }
+
+            @Override
+            public String version() {
+                return version;
+            }
+
+            @Override
+            public String identifier() {
+                return name + Module.VERSION_SEPARATOR + version;
+            }
+
+            @Override
+            public Collection<String> dependencies() {
+                return Collections.emptyList();
+            }
+
+            @Override
+            public Collection<String> optionalDependencies() {
+                return Collections.emptyList();
+            }
+
+            @Override
+            public boolean startable() {
+                return false;
+            }
+
+            @Override
+            public String mainClass() {
+                return null;
+            }
+
+            @Override
+            public URL rootResource() {
+                return jar;
+            }
+        };
     }
 }
