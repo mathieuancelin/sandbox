@@ -12,9 +12,9 @@ import cx.ath.mancel01.modules.api.Resource;
 import java.io.File;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import org.slf4j.Logger;
@@ -101,12 +101,16 @@ public class ModuleClassLoaderImpl extends URLClassLoader implements ModuleClass
             return super.loadClass(name);
         } catch (Throwable t) {
             err = true;
+            List<String> marked = Collections.synchronizedList(new ArrayList<String>());
             for (String dependency : module.dependencies()) {
                 if (module.delegateModules().getModules().containsKey(dependency)) {
-                    Module dep =module.delegateModules().getModules().get(dependency);
-                    if (dep.canLoad(name)) {
-                        logger.debug("Delegating {} to {}", name, dep.identifier);
-                        return dep.load(name);
+                    Module dep = module.delegateModules().getModules().get(dependency);
+                    if (!marked.contains(dep.identifier)) {
+                        marked.add(dep.identifier);
+                        if (dep.canLoad(name)) {
+                            logger.debug("Delegating {} to {}", name, dep.identifier);
+                            return dep.load(name);
+                        }
                     }
                 }
             }
@@ -119,21 +123,17 @@ public class ModuleClassLoaderImpl extends URLClassLoader implements ModuleClass
     }
 
     public boolean canLoad(String name) {
-        boolean can = true;
         for (String className : managedClasses) {
             if (className.equals(name)) {
                 return true;
             }
         }
-        Class<?> clazz = findLoadedClass(name);
-        if (clazz == null) {
-            try {
-                Class<?> cl = loadClass(name);
-            } catch (Throwable t) {
-                can = false;
-            }
-        }
-        return can;
+//        for (Module m : module.delegateModules().getModules().values()) {
+//            if (m.canLoad(name)) {
+//                return true;
+//            }
+//        }
+        return false;
     }
 
     @Override

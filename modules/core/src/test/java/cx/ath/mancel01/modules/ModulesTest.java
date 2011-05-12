@@ -25,6 +25,22 @@ public class ModulesTest {
     }
 
     @Test
+    public void testModulesCircular() throws Exception {
+        Configuration configuration1 =
+                Modules.getConfigurationFromJar(
+                new File("../module1-circular/target/module1-circular-1.0-SNAPSHOT.jar").toURI().toURL());
+        Configuration configuration2 = Modules.
+                getConfigurationFromJar(
+                new File("../module2/target/module2-1.0-SNAPSHOT.jar").toURI().toURL());
+        Configuration configuration3 = Modules.
+                getConfigurationFromJar(
+                new File("../module3/target/module3-1.0-SNAPSHOT.jar").toURI().toURL());
+        Modules modules = new Modules();
+        modules.addModules(configuration1, configuration2, configuration3);
+        modules.startModule(Module.getIdentifier(configuration2.name(), configuration2.version()));
+    }
+
+    @Test
     public void testModules() throws Exception {
         Configuration configuration1 = 
                 Modules.getConfigurationFromJar(

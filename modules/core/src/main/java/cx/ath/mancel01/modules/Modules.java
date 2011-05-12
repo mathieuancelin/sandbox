@@ -27,7 +27,7 @@ public class Modules {
     private Map<String, Module> modules = new HashMap<String, Module>();
 
     public Modules() {
-        logger.info("Start a new JAVA Modules Container !");
+        logger.info("Creation of a new Java Modules Container !");
     }
 
     public void addModule(final Configuration configuration) {

@@ -29,6 +29,7 @@ public class Module {
     private final Collection<String> dependencies;
     private final Modules delegateModules;
     private final Configuration configuration;
+    private ThreadLocal<List<String>> markedTL = new ThreadLocal<List<String>>();
 
     public Module(final Configuration configuration, Modules modules) {
         this.identifier = configuration.name() + VERSION_SEPARATOR + configuration.version();
@@ -51,8 +52,6 @@ public class Module {
                 if (!Modifier.isStatic(modifiers)) {
                     throw new NoSuchMethodException("Main method is not static for " + this);
                 }
-                //MainThread t = new MainThread(mainMethod);
-                //t.start();
                 Object arg = new String[] {};
                 mainMethod.invoke(null, arg);
             } catch (Exception ex) {
@@ -62,25 +61,11 @@ public class Module {
     }
 
     public Class<?> load(String name) {
-        if (canLoad(name)) {
-            try {
-                return moduleClassloader.loadClass(name);
-            } catch (ClassNotFoundException ex) {
-                throw new IllegalStateException("Missing dependency for class "
-                        + name + "from module " + identifier);
-            }
-        } else {
-            for (String dependency : dependencies) {
-                if (delegateModules.getModules().containsKey(dependency)) {
-                    Module module = delegateModules.getModules().get(dependency);
-                    if (module.canLoad(name)) {
-                        logger.debug("Delegating {} to {}", name, module.identifier);
-                        return module.load(name);
-                    }
-                }
-            }
+        try {
+            return moduleClassloader.loadClass(name);
+        } catch (ClassNotFoundException ex) {
             throw new IllegalStateException("Missing dependency for class "
-                    + name + " from module " + identifier);
+                    + name + "from module " + identifier);
         }
     }
 
