@@ -66,6 +66,14 @@ public class Modules {
         }
     }
 
+    public Module getModule(final String identifier) {
+        if (modules.containsKey(identifier)) {
+            return modules.get(identifier);
+        } else {
+            throw new IllegalStateException("Module " + identifier + " not found");
+        }
+    }
+
     public void clear() {
         modules.clear();
     }

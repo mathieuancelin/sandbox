@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Enumeration;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -51,7 +53,8 @@ public class Module {
                 }
                 //MainThread t = new MainThread(mainMethod);
                 //t.start();
-                mainMethod.invoke(null, new Object[]{});
+                Object arg = new String[] {};
+                mainMethod.invoke(null, arg);
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
             }
@@ -139,27 +142,26 @@ public class Module {
 
     public Enumeration<URL> getResources(String name) throws IOException {
         Enumeration<URL> urls = moduleClassloader.getJarResources(name);
-        if (urls == null) {
-            List<URL> externalUrls = new ArrayList<URL>();
-            for (Module mod : delegateModules.getModules().values()) {
-                Enumeration<URL> tmp = mod.getResources(name);
-                if (tmp != null) {
-                    externalUrls.addAll(Collections.list(tmp));
-                }
-            }
-            return Collections.enumeration(externalUrls);
-        } else {
-            return urls;
+        Set<URL> externalUrls = new HashSet<URL>();
+        if (urls != null) {
+            externalUrls.addAll(Collections.list(urls));
         }
+        for (Module mod : delegateModules.getModules().values()) {
+            Enumeration<URL> tmp = mod.moduleClassloader.getJarResources(name);
+            if (tmp != null) {
+                externalUrls.addAll(Collections.list(tmp));
+            }
+        }
+        return Collections.enumeration(externalUrls);
     }
 
 
     public InputStream getResourceAsStream(String name) {
         InputStream is = moduleClassloader.getJarResourceAsStream(name);
         if (is == null) {
-            List<InputStream> iss = new ArrayList<InputStream>();
+            Set<InputStream> iss = new HashSet<InputStream>();
             for (Module mod : delegateModules.getModules().values()) {
-                InputStream tmp = mod.getResourceAsStream(name);
+                InputStream tmp = mod.moduleClassloader.getJarResourceAsStream(name);
                 if (tmp != null) {
                     iss.add(mod.getResourceAsStream(name));
                 }
@@ -176,9 +178,9 @@ public class Module {
     public URL getResource(String name) {
         URL url = moduleClassloader.getJarResource(name);
         if (url == null) {
-            List<URL> urls = new ArrayList<URL>();
+            Set<URL> urls = new HashSet<URL>();
             for (Module mod : delegateModules.getModules().values()) {
-                URL tmp = mod.getResource(name);
+                URL tmp = mod.moduleClassloader.getJarResource(name);
                 if (tmp != null) {
                     urls.add(mod.getResource(name));
                 }
