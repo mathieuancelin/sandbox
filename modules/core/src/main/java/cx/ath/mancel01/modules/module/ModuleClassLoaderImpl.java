@@ -14,7 +14,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import org.slf4j.Logger;
@@ -29,6 +31,8 @@ public class ModuleClassLoaderImpl extends URLClassLoader implements ModuleClass
     private final Module module;
 
     private final List<String> managedClasses;
+
+    private final Set<String> dependenciesManagedClasses;
     
     private final List<Resource> managedResources;
 
@@ -46,6 +50,7 @@ public class ModuleClassLoaderImpl extends URLClassLoader implements ModuleClass
         super(urls, Modules.CLASSPATH_MODULE.getLoader());
         this.module = from;
         managedClasses = new ArrayList<String>();
+        dependenciesManagedClasses = new HashSet<String>();
         managedResources = new ArrayList<Resource>();
         final URL root = module.configuration().rootResource();
         String fileName = root.getFile();
@@ -128,12 +133,21 @@ public class ModuleClassLoaderImpl extends URLClassLoader implements ModuleClass
                 return true;
             }
         }
-//        for (Module m : module.delegateModules().getModules().values()) {
-//            if (m.canLoad(name)) {
-//                return true;
-//            }
-//        }
+        if (dependenciesManagedClasses.isEmpty()) {
+            Set<String> visited = new HashSet<String>();
+            visited.add(module.identifier);
+            computeDependenciesLoadable(visited);
+        }
+        for (String className : dependenciesManagedClasses) {
+            if (className.equals(name)) {
+                return true;
+            }
+        }
         return false;
+    }
+
+    List<String> getManagedClasses() {
+        return managedClasses;
     }
 
     @Override
@@ -166,5 +180,26 @@ public class ModuleClassLoaderImpl extends URLClassLoader implements ModuleClass
 
     Enumeration<URL> getJarResources(String name) throws IOException {
         return super.getResources(name);
+    }
+
+    List<String> getAllManagedClasses(Set<String> visited) {
+        if (dependenciesManagedClasses.isEmpty()) {
+            visited.add(module.identifier);
+            computeDependenciesLoadable(visited);
+        }
+        List<String> classes = new ArrayList<String>();
+        classes.addAll(managedClasses);
+        classes.addAll(dependenciesManagedClasses);
+        return classes;
+    }
+
+    private void computeDependenciesLoadable(Set<String> visited) {
+        for (String dep : module.dependencies()) {
+            Module m = module.delegateModules().getModule(dep);
+            if (!visited.contains(dep)) {
+                visited.add(dep);
+                dependenciesManagedClasses.addAll(m.getAllLoadableClasses(visited));
+            }
+        }
     }
 }

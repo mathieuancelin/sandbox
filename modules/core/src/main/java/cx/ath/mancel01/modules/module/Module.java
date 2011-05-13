@@ -179,6 +179,20 @@ public class Module {
         }
     }
 
+    public List<String> getAllLoadableClasses() {
+        Set<String> visited = new HashSet<String>();
+        visited.add(identifier);
+        return getAllLoadableClasses(visited);
+    }
+
+    List<String> getAllLoadableClasses(Set<String> visited) {
+        return moduleClassloader.getAllManagedClasses(visited);
+    }
+
+    List<String> getManagedClasses() {
+        return moduleClassloader.getManagedClasses();
+    }
+
     public static String getIdentifier(String name, String version) {
         return name + Module.VERSION_SEPARATOR + version;
     }
